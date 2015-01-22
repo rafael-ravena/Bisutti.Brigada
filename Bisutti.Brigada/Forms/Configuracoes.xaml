@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Bisutti.Brigada.Forms.Configuracoes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="550">
+	<DockPanel LastChildFill="False">
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<TextBlock Style="{StaticResource BlockHeader}">Configurações do aplicativo</TextBlock>
+				<Grid Name="GridAplicativo">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="250" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="18" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="1">Email do desenvolvedor:</TextBlock>
+					<TextBlock Grid.Row="2">Salvar última página visitada:</TextBlock>
+					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=DataContext.DevelopersEmail}" />
+					<CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding Path=DataContext.SaveLastPage}" />
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="AplicativoToggle">
+						<Image Name="ImgAplicativo" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+	</DockPanel>
+</UserControl>

@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="Bisutti.Brigada.Forms.Acoes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viblendEditors="clr-namespace:VIBlend.WPF.Controls;assembly=VIBlend.WPF.Editors"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="650">
+	<DockPanel LastChildFill="False">
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="250" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="30" />
+					<RowDefinition Height="25" />
+					<RowDefinition Height="25" />
+				</Grid.RowDefinitions>
+				<TextBlock Style="{StaticResource BlockHeader}" Grid.ColumnSpan="3">Período</TextBlock>
+				<TextBlock Grid.Row="1">Início:</TextBlock>
+				<TextBlock Grid.Row="2">Término:</TextBlock>
+				<viblendEditors:DateTimePicker DefaultDateTimeFormat="ShortDatePattern" Culture="pt-BR" SelectedDate="{Binding Path=DataContext.DataInicio, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" />
+				<viblendEditors:DateTimePicker DefaultDateTimeFormat="ShortDatePattern" Culture="pt-BR" SelectedDate="{Binding Path=DataContext.DataTermino, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" />
+			</Grid>
+		</Border>
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<TextBlock Style="{StaticResource BlockHeader}">Configurações de email</TextBlock>
+				<Grid Name="GridEmail">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="380" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="18" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="1">Enviar e-mails gerados pelo aplicativo automaticamente:</TextBlock>
+					<TextBlock Grid.Row="2">Assunto (e-mail brigada):</TextBlock>
+					<TextBlock Grid.Row="3">Modelo (e-mail brigada):</TextBlock>
+					<TextBlock Grid.Row="4">Assunto (e-mail produção):</TextBlock>
+					<TextBlock Grid.Row="5">Modelo (e-mail produção):</TextBlock>
+					<CheckBox IsChecked="{Binding Path=DataContext.SendAuto}" Grid.Column="1" Grid.Row="1" />
+					<TextBox Text="{Binding Path=DataContext.BrigadaSubject}" Grid.Column="1" Grid.Row="2" />
+					<DockPanel Grid.Column="1" Grid.Row="3">
+						<Button Style="{StaticResource FindButton}" DockPanel.Dock="Right" Click="SearchFileClicked" Tag="Brigada" />
+						<TextBox Text="{Binding Path=DataContext.BrigadaEmailModel}" Name="txbEmailBrigada" IsEnabled="False" />
+					</DockPanel>
+					<TextBox Text="{Binding Path=DataContext.ProducaoSubject}" Grid.Column="1" Grid.Row="4" />
+					<DockPanel Grid.Column="1" Grid.Row="5">
+						<Button Style="{StaticResource FindButton}" DockPanel.Dock="Right" Click="SearchFileClicked" Tag="Producao" />
+						<TextBox Text="{Binding Path=DataContext.ProducaoEmailModel}" Name="txbEmailProducao" IsEnabled="False" />
+					</DockPanel>
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="EmailToggle">
+						<Image Name="ImgEmail" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<TextBlock Style="{StaticResource BlockHeader}">E-mails para a brigada no período</TextBlock>
+				<Grid Name="GridBrigada">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="150" />
+						<ColumnDefinition Width="150*" />
+						<ColumnDefinition Width="250" />
+						<ColumnDefinition Width="18" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30" />
+						<RowDefinition Height="25" />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="1">Assunto formatado:</TextBlock>
+					<TextBox IsEnabled="False" Grid.Row="1" Grid.Column="1" Text="{Binding Path=DataContext.FormatedBrigadaSubject}" Name="txbBrigada" />
+					<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+						<Button Style="{StaticResource SendButton}" Content="Processar e-mails da brigada" Click="SendBrigadaClicked" />
+					</StackPanel>
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="BrigadaToggle">
+						<Image Name="ImgBrigada" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<TextBlock Style="{StaticResource BlockHeader}">E-mail para a produção no período</TextBlock>
+				<Grid Name="GridProducao">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="150" />
+						<ColumnDefinition Width="150*" />
+						<ColumnDefinition Width="250" />
+						<ColumnDefinition Width="18" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30" />
+						<RowDefinition Height="25" />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="1">Assunto formatado:</TextBlock>
+					<TextBox IsEnabled="False" Grid.Row="1" Grid.Column="1" Text="{Binding Path=DataContext.FormatedProducaoSubject}" Name="txbProducao" />
+					<StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center">
+						<Button Style="{StaticResource SendButton}" Content="Processar e-mails da produção" Click="SendProducaoClicked" />
+					</StackPanel>
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="BrigadaToggle">
+						<Image Name="ImgProducao" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+	</DockPanel>
+</UserControl>

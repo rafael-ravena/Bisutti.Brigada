@@ -1,0 +1,48 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Bisutti.Brigada.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Inicio" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2015-01-05</Value>
+    </Setting>
+    <Setting Name="Termino" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2015-01-31</Value>
+    </Setting>
+    <Setting Name="BrigadaSubject" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Eventos de {0} até {1}</Value>
+    </Setting>
+    <Setting Name="EventosExcelOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0,1,2,3,4,5,6</Value>
+    </Setting>
+    <Setting Name="BrigadaExcelOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0,1,2,3,4,5,6,7,9</Value>
+    </Setting>
+    <Setting Name="DevelopersEmail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">rafael.ravena@gmail.com</Value>
+    </Setting>
+    <Setting Name="ProducaoSubject" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Eventos da Semana ({0} a {1})</Value>
+    </Setting>
+    <Setting Name="SaveLastScreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SendAutomatically" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="BrigadaEmailFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\Arquivos\Brigada.htm</Value>
+    </Setting>
+    <Setting Name="ProducaoEmailFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\Arquivos\Producao.htm</Value>
+    </Setting>
+    <Setting Name="Debug" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LastScreen" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Configuracoes</Value>
+    </Setting>
+    <Setting Name="LastExcelFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">..\Arquivos\excel.xlsx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

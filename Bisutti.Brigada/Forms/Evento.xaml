@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="Bisutti.Brigada.Forms.Evento"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viblendEditors="clr-namespace:VIBlend.WPF.Controls;assembly=VIBlend.WPF.Editors"
+   			 xmlns:model="clr-namespace:Bisutti.Brigada"
+	         mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="700" Background="Transparent">
+	<UserControl.Resources>
+		<model:BoolToObjectConverter x:Key="ShowCerimonial" TrueValue="Cerim. " FalseValue="" />
+		<model:BoolToObjectConverter x:Key="ShowChapelaria" TrueValue="Chap. " FalseValue="" />
+		<model:BoolToObjectConverter x:Key="ShowRecepcao" TrueValue="Recep." FalseValue="" />
+		<model:EnumToStringConverter x:Key="ConvertFromEnum" />
+	</UserControl.Resources>
+	<DockPanel>
+		<Border DockPanel.Dock="Top" Style="{StaticResource PanelBorder}">
+			<Grid>
+				<Grid Name="GridEvento">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="100" />
+						<ColumnDefinition Width="200" />
+						<ColumnDefinition Width="100" />
+						<ColumnDefinition Width="200" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<TextBlock Text="Data:" />
+					<TextBlock Text="Onde:" Grid.Column="2" />
+					<TextBlock Text="Produtora:" Grid.Row="1" />
+					<TextBlock Text="Tipo de evento:" Grid.Row="1" Grid.Column="2" />
+					<TextBlock Text="Contratante:" Grid.Row="2" />
+					<TextBlock Text="Tipo de evento:" Grid.Row="2" Grid.Column="2" />
+					<StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="2">
+						<viblendEditors:DateTimePicker Name="txbDataEvento" SelectedDate="{Binding Path=DataContext.Element.Data, Mode=TwoWay}" Culture="pt-BR" Grid.Column="0" DefaultDateTimeFormat="ShortDatePattern" />
+						<viblendEditors:DateTimeEditor Name="txbInicioEvento" Value="{Binding Path=DataContext.Element.DataInicio, Mode=TwoWay}" Culture="pt-BR" Grid.Column="1" DefaultDateTimeFormat="ShortTimePattern" FormatValue="HH:mm" />
+						<TextBlock>às</TextBlock>
+						<viblendEditors:DateTimeEditor Name="txbTerminoEvento" Value="{Binding Path=DataContext.Element.DataTermino, Mode=TwoWay}" Culture="pt-BR" Grid.Column="2" DefaultDateTimeFormat="ShortTimePattern" FormatValue="HH:mm" />
+					</StackPanel>
+					<ComboBox Name="cboLocalizacao" Style="{StaticResource ObjectBoundComboBox}" ItemsSource="{Binding DataContext.Localizacoes}" SelectedValue="{Binding DataContext.Element.LocalizacaoId}" Grid.Column="3" />
+					<ComboBox Name="cboProdutora" Style="{StaticResource ObjectBoundComboBox}" ItemsSource="{Binding DataContext.Produtoras}" SelectedValue="{Binding DataContext.Element.ProdutoraId}" Grid.Column="1" Grid.Row="1" />
+					<ComboBox Name="cboTipoEvento" Style="{StaticResource ObjectBoundComboBox}" ItemsSource="{Binding DataContext.Tipos}" SelectedValue="{Binding DataContext.Element.TipoEventoId}" DisplayMemberPath="Key" SelectedValuePath="Value" Grid.Column="3" Grid.Row="1" />
+					<TextBox Name="TxbContratante" Text="{Binding Path=DataContext.Contratante}" Grid.Row="2" Grid.Column="1" />
+					<DockPanel Grid.Column="3" Grid.Row="2">
+						<Button Style="{StaticResource FindButton}" DockPanel.Dock="Right" Click="SearchFileClicked" Tag="Brigada" />
+						<TextBox Text="{Binding Path=DataContext.Element.Anexo}" Name="TxbAnexo" IsEnabled="False" />
+					</DockPanel>
+					<StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+						<Button Style="{StaticResource SaveButton}" Content="Salvar" Click="SalvarClicked" />
+						<Button Style="{StaticResource DiscartButton}" Content="Descartar" Click="CancelarClicked" />
+					</StackPanel>
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="EventoToggle">
+						<Image Name="ImgEvento" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+		<Border DockPanel.Dock="Top" Style="{StaticResource PanelBorder}">
+			<Grid>
+				<Grid Name="GridBrigada">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="80" />
+						<ColumnDefinition Width="150" />
+						<ColumnDefinition Width="100" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="18" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25" />
+						<RowDefinition Height="100" />
+					</Grid.RowDefinitions>
+					<TextBlock>Brigada:</TextBlock>
+					<TextBlock Grid.Column="2">Colaborador:</TextBlock>
+					<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" VerticalAlignment="Bottom">
+						<Button Content="Adicionar aos eventos selecionados" Style="{StaticResource AddButton}" Click="AddBrigadaClicked" />
+					</StackPanel>
+					<ComboBox Name="CboTipoBrigada" ItemsSource="{Binding Path=DataContext.Brigadas}" Grid.Column="1" SelectedValuePath="Id">
+						<ComboBox.ItemTemplate>
+							<DataTemplate>
+								<TextBlock>
+									<TextBlock.Text>
+										<MultiBinding StringFormat="{}{0} (R$ {1})">
+											<Binding Path="Nome"/>
+											<Binding Path="Paga"/>
+										</MultiBinding>
+									</TextBlock.Text></TextBlock>
+							</DataTemplate>
+						</ComboBox.ItemTemplate>
+					</ComboBox>
+					<ListView Name="LstColaboradores" ItemsSource="{Binding Path=DataContext.Colaboradores}" SelectionMode="Single" Grid.Column="3" Grid.RowSpan="2">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Nome" DisplayMemberBinding="{Binding Path=Nome}" />
+								<GridViewColumn Header="Telefone" DisplayMemberBinding="{Binding Path=Telefone}" />
+								<GridViewColumn Header="Cargos">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock>
+												<TextBlock.Text>
+													<MultiBinding StringFormat="{}{0}{1}{2}">
+														<Binding Path="DisponivelCerimonial" Converter="{StaticResource ShowCerimonial}" />
+														<Binding Path="DisponivelChapelaria" Converter="{StaticResource ShowChapelaria}" />
+														<Binding Path="DisponivelRecepcao" Converter="{StaticResource ShowRecepcao}" />
+													</MultiBinding>
+												</TextBlock.Text></TextBlock>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Disponibilidade" DisplayMemberBinding="{Binding Path=Disponibilidade, Converter={StaticResource ConvertFromEnum}}" />
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="BrigadaToggle">
+						<Image Name="ImgBrigada" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+		<Border DockPanel.Dock="Top" Style="{StaticResource PanelBorder}">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Style="{StaticResource InfoText}">Filtrar por:</TextBlock>
+				<TextBlock>Data:</TextBlock>
+				<viblendEditors:DateTimePicker Name="txbFilterInicial" SelectedDate="{Binding Path=DataContext.FilterInicial, Mode=TwoWay}" SelectedDateChanged="FilterChanged" Culture="pt-BR" DefaultDateTimeFormat="ShortDatePattern" />
+				<TextBlock>até</TextBlock>
+				<viblendEditors:DateTimePicker Name="txbFilterFinal" SelectedDate="{Binding Path=DataContext.FilterFinal, Mode=TwoWay}" SelectedDateChanged="FilterChanged" Culture="pt-BR" DefaultDateTimeFormat="ShortDatePattern" />
+				<TextBlock>Local:</TextBlock>
+				<ComboBox Width="80" Name="cboFilterLocal" Style="{StaticResource ObjectBoundComboBox}" ItemsSource="{Binding Path=DataContext.Localizacoes}" SelectedValue="{Binding Path=DataContext.FilterLocal}" SelectionChanged="FilterChanged" />
+				<TextBlock>Produtora:</TextBlock>
+				<ComboBox Width="80" Name="cboFilterProdutora" Style="{StaticResource ObjectBoundComboBox}" ItemsSource="{Binding Path=DataContext.Produtoras}" SelectedValue="{Binding Path=DataContext.FilterProdutora}" SelectionChanged="FilterChanged" />
+				<Button Style="{StaticResource DiscartButton}" Content="Limpar filtros" Click="ClearFilterClicked" />
+			</StackPanel>
+		</Border>
+		<ListView Name="LstEventos" Margin="5" ItemsSource="{Binding DataContext.Collection}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Editar">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource EditButton}" Content="Editar" PreviewMouseLeftButtonUp="EditEventoClicked" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Excluir">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource DeleteButton}" Content="Excluir" PreviewMouseLeftButtonUp="DeleteEventoClicked" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="300" Header="Colaboradores">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<ListBox ItemsSource="{Binding Colaboradores}">
+									<ListBox.ItemTemplate>
+										<DataTemplate>
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="100" />
+													<ColumnDefinition Width="150" />
+													<ColumnDefinition Width="*" />
+												</Grid.ColumnDefinitions>
+												<TextBlock Grid.Column="0" Style="{StaticResource InfoText}" Text="{Binding TipoBrigada.Nome}" />
+												<TextBlock Grid.Column="1" Style="{StaticResource InfoText}" Text="{Binding Colaborador.Nome}" />
+												<Button Style="{StaticResource DeleteButton}" Content="remover" Grid.Column="2" Click="DeleteBrigadaClicked" />
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="150" Header="Quando">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock Style="{StaticResource InfoText}" Text="{Binding Path=Data, StringFormat=\{0:dd/MM/yyyy\}}" />
+									<TextBlock Style="{StaticResource InfoText}" Text="{Binding Path=DataInicio, StringFormat=\{0:HH:mm\}}" />
+								</StackPanel>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="100" DisplayMemberBinding="{Binding Localizacao.Nome}" Header="Onde" />
+					<GridViewColumn Width="80" DisplayMemberBinding="{Binding TipoEvento, Converter={StaticResource ConvertFromEnum}}" Header="Tipo" />
+					<GridViewColumn Width="100" DisplayMemberBinding="{Binding Produtora.Nome}" Header="Produtora" />
+					<GridViewColumn Width="100" DisplayMemberBinding="{Binding Anexo}" Header="Anexo" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</DockPanel>
+</UserControl>

@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Bisutti.Brigada.Forms.Brigada"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:bbc="clr-namespace:Bisutti.Brigada.UserControls"
+			 xmlns:model="clr-namespace:Bisutti.Brigada"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="550">
+	<UserControl.Resources>
+		<model:BoolToObjectConverter x:Key="BoolConverter" TrueValue="Sim" FalseValue="Não" />
+	</UserControl.Resources>
+	<DockPanel LastChildFill="True">
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<Grid Name="GridForm">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="150" />
+						<ColumnDefinition Width="80" />
+						<ColumnDefinition Width="170" />
+						<ColumnDefinition Width="50" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+					</Grid.RowDefinitions>
+					<TextBlock>Tipo de brigada:</TextBlock>
+					<TextBlock Grid.Row="1">Valor da paga:</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="2">Inclui OS no envio:</TextBlock>
+					<TextBox Name="TxbNome" Text="{Binding Path=DataContext.Element.Nome}" Grid.Column="1" Grid.ColumnSpan="3" />
+					<bbc:CurrencyTextBox x:Name="TxbPaga" Value="{Binding Path=DataContext.Element.Paga, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1" Margin="1" />
+					<CheckBox Name="CkbIncluiAnexo" IsChecked="{Binding Path=DataContext.Element.IncluiAnexo}" Grid.Row="1" Grid.Column="3" />
+					<StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+						<Button Style="{StaticResource SaveButton}" Content="Salvar" Click="SalvarClicked" />
+						<Button Style="{StaticResource DiscartButton}" Content="Descartar" Click="DescartarClicked" />
+						<TextBlock Name="Trace" />
+					</StackPanel>
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="GridToggle">
+						<Image Name="ImgGrid" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+		<ListView Margin="5" Name="LstBrigadas" ItemsSource="{Binding Path=DataContext.Collection}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Editar">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource EditButton}" PreviewMouseLeftButtonUp="EditBrigadaClicked" Content="Editar" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Excluir">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource DeleteButton}" PreviewMouseLeftButtonUp="DeleteBrigadaClicked" Content="Editar" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="250" Header="Tipo" DisplayMemberBinding="{Binding Path=Nome}" />
+					<GridViewColumn Width="100" Header="Paga" DisplayMemberBinding="{Binding Path=Paga}" />
+					<GridViewColumn Width="100" Header="Inclui OS" DisplayMemberBinding="{Binding Path=IncluiAnexo, Converter={StaticResource BoolConverter}}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</DockPanel>
+</UserControl>

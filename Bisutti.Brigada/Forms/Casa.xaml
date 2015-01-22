@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Bisutti.Brigada.Forms.Casa"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="750" Background="Transparent">
+	<DockPanel LastChildFill="True">
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<Grid Name="GridForm">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="100" />
+						<ColumnDefinition Width="200" />
+						<ColumnDefinition Width="100" />
+						<ColumnDefinition Width="100" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+					</Grid.RowDefinitions>
+					<TextBlock Text="Nome:" />
+					<TextBox Name="TxbNome" Grid.Column="1" Text="{Binding DataContext.Element.Nome}" />
+					<TextBlock Text="Sigla:" Grid.Column="2" />
+					<TextBox Name="TxbSigla" Grid.Column="3" Text="{Binding DataContext.Element.Sigla}" />
+					<TextBlock Grid.Row="1" Text="Endereço:" />
+					<TextBox Grid.Row="1" Name="TxbEndereco" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding DataContext.Element.Endereco}" />
+					<StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+						<Button Style="{StaticResource SaveButton}" Content="Salvar" Click="SalvarClicked" />
+						<Button Style="{StaticResource DiscartButton}" Content="Descartar" Click="CancelarClicked" />
+					</StackPanel>
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="GridToggle">
+						<Image Name="ImgGrid" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Filtrar pela sigla" />
+				<TextBox Name="txbFilterSigla" Width="250" KeyUp="FilterTextChanged" />
+			</StackPanel>
+		</Border>
+		<ListView Name="lstCasas" Margin="5" ItemsSource="{Binding Path=DataContext.Collection}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Editar">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource EditButton}" PreviewMouseLeftButtonUp="EditCasaClicked" Content="Editar" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Excluir">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource DeleteButton}" PreviewMouseLeftButtonUp="DeleteCasaClicked" Content="Excluir" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Width="80" DisplayMemberBinding="{Binding Path=Sigla}" Header="Sigla" />
+					<GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=Nome}" Header="Nome" />
+					<GridViewColumn Width="400" DisplayMemberBinding="{Binding Path=Endereco}" Header="Endereço" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</DockPanel>
+</UserControl>

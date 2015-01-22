@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Brigada Bisuti Setup" Language="1046" Codepage="1252" Version="1.0.0.0" Manufacturer="RRavena (Para Villa Bisutti)" UpgradeCode="7e45fc89-149f-479f-b702-9a436169a179">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="Uma versão mais nova de [ProductName] já está instalada." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Feature Id="ProductFeature" Title="Setup" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="AdditionalFiles" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="DesktopFolder" Name="Desktop" />
+			<Directory Id="ProgramMenuFolder" Name="Programs">
+				<Directory Id="ApplicationProgramsFolder" Name="Brigada Bisutti" />
+			</Directory>
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="Bisutti.Brigada">
+					<Directory Id="Arquivos" Name="Arquivos" />
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Guid="{79DFCFEE-8738-4EAE-B038-5ECD6AD0A501}">
+				<File Source="$(var.Bisutti.Brigada.TargetPath)" KeyPath="yes">
+					<Shortcut Id="StartMenuShortcut"
+							  Name="Brigada Bisutti"
+							  WorkingDirectory="INSTALLFOLDER"
+							  Directory="ProgramMenuFolder"
+							  IconIndex="0"
+							  Advertise="yes" />
+					<Shortcut Id="DesktopShortcut"
+							  Name="Brigada Bisutti"
+							  WorkingDirectory="INSTALLFOLDER"
+							  Directory="DesktopFolder"
+							  IconIndex="0"
+							  Advertise="yes" />
+				</File>
+				<RemoveFolder Id="CleanUp" Directory="ApplicationProgramsFolder" On="uninstall" />
+			</Component>
+			<Component Guid="{D54E2BF1-1077-4E5D-8E44-20DA73F37B0C}">
+				<File Source="..\Bisutti.Brigada\bin\Debug\EntityFramework.dll" KeyPath="yes" />
+			</Component>
+			<Component Guid="{431891B8-9029-4C74-9D93-03446D50B880}">
+				<File Source="..\Bisutti.Brigada\bin\Debug\EntityFramework.SqlServer.dll" KeyPath="yes" />
+			</Component>
+			<Component Guid="{E1B12647-5C3F-4FEF-9EE2-2F35B831A624}">
+				<File Source="..\Bisutti.Brigada\bin\Debug\EntityFramework.SqlServerCompact.dll" KeyPath="yes" />
+			</Component>
+			<Component Guid="{5577E3D3-1317-4EEC-97DB-13440A047CC4}">
+				<File Source="..\Bisutti.Brigada\bin\Debug\System.Data.SqlServerCE.dll" KeyPath="yes" />
+			</Component>
+			<Component Guid="{98D5F00C-F3B0-4319-8FF5-462DAEE5F5E9}">
+				<File Source="..\Bisutti.Brigada\bin\Debug\VIBlend.WPF.Editors.dll" KeyPath="yes" />
+			</Component>
+			<Component Guid="{723C67F5-0DED-4C38-A38F-FBC9BB5004D9}">
+				<File Source="..\Bisutti.Brigada\bin\Debug\VIBlend.WPF.Utilities.dll" KeyPath="yes" />
+			</Component>
+			<Component Guid="{2FA1B55C-D635-40CB-9E44-E4B5B30C53BC}">
+				<File Source="..\Bisutti.Brigada\Bin\Debug\Bisutti.Brigada.exe.config" KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+		<ComponentGroup Id="AdditionalFiles" Directory="Arquivos">
+			<Component Guid="{A2E35931-36C6-4B0C-AB48-12DE40B1FFB8}" Id="AdditionalFiles">
+				<File Id="BrigadaEmail" Source="..\Bisutti.Brigada\Arquivos\Brigada.html" />
+				<File Id="ProducaoEmail" Source="..\Bisutti.Brigada\Arquivos\Producao.html"  />
+				<File Id="ExcelFile" Source="..\Bisutti.Brigada\Arquivos\excel.xlsx"  />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

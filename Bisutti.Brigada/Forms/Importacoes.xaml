@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="Bisutti.Brigada.Forms.Importacoes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="650">
+	<DockPanel LastChildFill="False">
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<TextBlock Style="{StaticResource BlockHeader}" Text="Configurações de importação (Brigada)" />
+				<Grid Name="GridBrigada">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="120" />
+						<ColumnDefinition Width="50" />
+						<ColumnDefinition Width="120" />
+						<ColumnDefinition Width="50" />
+						<ColumnDefinition Width="120" />
+						<ColumnDefinition Width="50" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="1" Style="{StaticResource GridHeader}">Propriedade</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource GridHeader}">Coluna</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource GridHeader}">Propriedade</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="3" Style="{StaticResource GridHeader}">Coluna</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource GridHeader}">Propriedade</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="5" Style="{StaticResource GridHeader}">Coluna</TextBlock>
+					<TextBlock Grid.Row="2">Nome:</TextBlock>
+					<TextBlock Grid.Row="2" Grid.Column="2">Email:</TextBlock>
+					<TextBlock Grid.Row="2" Grid.Column="4">Telefone:</TextBlock>
+					<TextBlock Grid.Row="3">Disponibilidade:</TextBlock>
+					<TextBlock Grid.Row="3" Grid.Column="2">Cargo:</TextBlock>
+					<TextBlock Grid.Row="3" Grid.Column="4">Referência:</TextBlock>
+					<TextBlock Grid.Row="4">Dados bancários:</TextBlock>
+					<TextBlock Grid.Row="4" Grid.Column="2">Observações:</TextBlock>
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="1" SelectedValue="{Binding Path=DataContext.BrigadaNome}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="3" SelectedValue="{Binding Path=DataContext.BrigadaEmail}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="5" SelectedValue="{Binding Path=DataContext.BrigadaTelefone}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="3" Grid.Column="1" SelectedValue="{Binding Path=DataContext.BrigadaDisponibilidade}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="3" Grid.Column="3" SelectedValue="{Binding Path=DataContext.BrigadaCargo}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="3" Grid.Column="5" SelectedValue="{Binding Path=DataContext.BrigadaReferencia}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="4" Grid.Column="1" SelectedValue="{Binding Path=DataContext.BrigadaDadosBancarios}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="4" Grid.Column="3" SelectedValue="{Binding Path=DataContext.BrigadaObservacoes}" />
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="BrigadaToggle">
+						<Image Name="ImgBrigada" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<TextBlock Style="{StaticResource BlockHeader}" Text="Configurações de importação (Eventos)" />
+				<Grid Name="GridEvento">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="120" />
+						<ColumnDefinition Width="50" />
+						<ColumnDefinition Width="120" />
+						<ColumnDefinition Width="50" />
+						<ColumnDefinition Width="120" />
+						<ColumnDefinition Width="50" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="25" />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="1" Style="{StaticResource GridHeader}">Propriedade</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource GridHeader}">Coluna</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource GridHeader}">Propriedade</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="3" Style="{StaticResource GridHeader}">Coluna</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource GridHeader}">Propriedade</TextBlock>
+					<TextBlock Grid.Row="1" Grid.Column="5" Style="{StaticResource GridHeader}">Coluna</TextBlock>
+					<TextBlock Grid.Row="2">Data:</TextBlock>
+					<TextBlock Grid.Row="2" Grid.Column="2">Contratante:</TextBlock>
+					<TextBlock Grid.Row="2" Grid.Column="4">Início:</TextBlock>
+					<TextBlock Grid.Row="3">Término:</TextBlock>
+					<TextBlock Grid.Row="3" Grid.Column="2">Produtora:</TextBlock>
+					<TextBlock Grid.Row="3" Grid.Column="4">Local:</TextBlock>
+					<TextBlock Grid.Row="4">Tipo:</TextBlock>
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="1" SelectedValue="{Binding Path=DataContext.EventoData}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="3" SelectedValue="{Binding Path=DataContext.EventoContratante}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="5" SelectedValue="{Binding Path=DataContext.EventoInicio}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="3" Grid.Column="1" SelectedValue="{Binding Path=DataContext.EventoTermino}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="3" Grid.Column="3" SelectedValue="{Binding Path=DataContext.EventoProdutora}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="3" Grid.Column="5" SelectedValue="{Binding Path=DataContext.EventoLocalizacao}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="4" Grid.Column="1" SelectedValue="{Binding Path=DataContext.EventoTipo}" />
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="EventoToggle">
+						<Image Name="ImgEvento" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid>
+				<TextBlock Style="{StaticResource BlockHeader}">Importar dados de arquivo excel</TextBlock>
+				<Grid Name="GridImportacoes">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="200" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="18" />
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30" />
+						<RowDefinition Height="250" />
+					</Grid.RowDefinitions>
+					<DockPanel Grid.Row="1">
+						<TextBlock DockPanel.Dock="Top" Style="{StaticResource LeftLabel}">Arquivo excel:</TextBlock>
+						<DockPanel DockPanel.Dock="Top">
+							<Button Style="{StaticResource FindButton}" DockPanel.Dock="Right" Click="SearchFileClicked" Tag="Brigada" />
+							<TextBox Name="txbArquivoExcel" IsEnabled="False" Text="{Binding Path=LastExcelFile}" />
+						</DockPanel>
+						<TextBlock DockPanel.Dock="Top" Style="{StaticResource LeftLabel}">Abas do arquivo excel:</TextBlock>
+						<TextBlock Style="{StaticResource Instructions}" Name="ImportacaoTrace" DockPanel.Dock="Bottom" Height="80" />
+						<Button DockPanel.Dock="Bottom" Style="{StaticResource ImportButton}" Content="Importar brigada" Click="ImportarBrigada" />
+						<Button DockPanel.Dock="Bottom" Style="{StaticResource ImportButton}" Content="Importar eventos" Click="ImportarEventos" />
+						<ListBox Name="LstSheets" ItemsSource="{Binding Path=DataContext.Sheets, Mode=TwoWay}">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<CheckBox Content="{Binding Path=Key}" IsChecked="{Binding Path=Value}" />
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</DockPanel>
+					<StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+						<TextBlock Style="{StaticResource Instructions}" TextAlignment="Justify" Margin="5">
+						Escolha o arquivo e selecione as abas (planilhas) que deseja importar.<LineBreak />
+						O arquivo deve ser uma planilha excel.</TextBlock>
+						<TextBlock Style="{StaticResource RunTitle}">Atenção</TextBlock>
+						<TextBlock Style="{StaticResource Instructions}">
+							Ao importar múltiplas planilhas, o aplicativo importará os dados distintos, 
+							usando como critérios exclusivos as seguintes propriedades:
+						</TextBlock>
+						<TextBlock Style="{StaticResource IdentedBlock}">
+							<Span FontWeight="Bold">&#8226;Brigada:</Span><LineBreak />
+							Os colaboradores serão agrupados pelo nome, sendo excluidos aqueles que não possuírem os dados de e-mail e telefone preenchidos.</TextBlock>
+						<TextBlock Style="{StaticResource IdentedBlock}">
+							<Span FontWeight="Bold">&#8226;Evento:</Span><LineBreak />
+							Os eventos serão importados apenas aqueles que possuírem os dados de local, produtora e data corretamente preenchidos.</TextBlock>
+						<TextBlock Style="{StaticResource Instructions}">O aplicativo não importará dados repetidos.</TextBlock>
+						<TextBlock Style="{StaticResource WarningInstructions}" TextAlignment="Justify" Margin="5">
+						Antes de fazer a importação dos arquivos em excel, verifique a disposição das colunas em seu arquivo, selecionando-as corretamente de acordo com a configuração do arquivo.<LineBreak/>
+						Se as colunas não estiverem corretamente atribuidas às propriedades, o sistema poderá acusar erros, interrompendo a importação.</TextBlock>
+					</StackPanel>
+				</Grid>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="BrigadaToggle">
+						<Image Name="ImgImportacoes" Source="../Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
+	</DockPanel>
+</UserControl>
