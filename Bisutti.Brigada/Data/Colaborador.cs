@@ -43,13 +43,18 @@ namespace Bisutti.Brigada.Data
 				.Include(c => c.Eventos)
 				.Include(c => c.Eventos.Select(e => e.TipoBrigada))
 				.Include(c => c.Eventos.Select(e => e.Evento))
+				.Include(c => c.Eventos.Select(e => e.Evento.Colaboradores))
+				.Include(c => c.Eventos.Select(e => e.Evento.Colaboradores.Select(b => b.Colaborador)))
+				.Include(c => c.Eventos.Select(e => e.Evento.Colaboradores.Select(b => b.TipoBrigada)))
 				.Include(c => c.Eventos.Select(e => e.Evento.Produtora))
 				.Include(c => c.Eventos.Select(e => e.Evento.Localizacao))
 				.Where(c => c.Eventos.Where(b => b.Evento.Data.CompareTo(inicio) >= 0 && b.Evento.Data.CompareTo(termino) <= 0).Count() > 0)
 				.OrderBy(c => c.Nome)
 				.ToList();
 			foreach (Model.Colaborador c in colaboradores)
+			{
 				c.Eventos = c.Eventos.Where(e => e.Evento.Data.CompareTo(inicio) >= 0 && e.Evento.Data.CompareTo(termino) <= 0).OrderBy(e => e.Evento.Data).ToList();
+			}
 			return colaboradores;
 		}
 		public List<Model.Colaborador> Filter(string nome, bool dispCerimonial, bool dispChapelaria, bool dispRecepcao, bool dispProducao, object disponibilidadeDiaria)

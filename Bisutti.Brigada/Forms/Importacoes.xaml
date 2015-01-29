@@ -83,12 +83,13 @@
 					<TextBlock Grid.Row="1" Grid.Column="4" Style="{StaticResource GridHeader}">Propriedade</TextBlock>
 					<TextBlock Grid.Row="1" Grid.Column="5" Style="{StaticResource GridHeader}">Coluna</TextBlock>
 					<TextBlock Grid.Row="2">Data:</TextBlock>
-					<TextBlock Grid.Row="2" Grid.Column="2">Contratante:</TextBlock>
-					<TextBlock Grid.Row="2" Grid.Column="4">Início:</TextBlock>
-					<TextBlock Grid.Row="3">Término:</TextBlock>
+					<TextBlock Grid.Row="2" Grid.Column="2">Início:</TextBlock>
+					<TextBlock Grid.Row="2" Grid.Column="4">Término:</TextBlock>
+					<TextBlock Grid.Row="3">Contratante:</TextBlock>
 					<TextBlock Grid.Row="3" Grid.Column="2">Produtora:</TextBlock>
 					<TextBlock Grid.Row="3" Grid.Column="4">Local:</TextBlock>
 					<TextBlock Grid.Row="4">Tipo:</TextBlock>
+					<TextBlock Grid.Row="4" Grid.Column="2">OS:</TextBlock>
 					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="1" SelectedValue="{Binding Path=DataContext.EventoData}" />
 					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="3" SelectedValue="{Binding Path=DataContext.EventoContratante}" />
 					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="2" Grid.Column="5" SelectedValue="{Binding Path=DataContext.EventoInicio}" />
@@ -96,6 +97,7 @@
 					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="3" Grid.Column="3" SelectedValue="{Binding Path=DataContext.EventoProdutora}" />
 					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="3" Grid.Column="5" SelectedValue="{Binding Path=DataContext.EventoLocalizacao}" />
 					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="4" Grid.Column="1" SelectedValue="{Binding Path=DataContext.EventoTipo}" />
+					<ComboBox ItemsSource="{Binding Path=DataContext.Colunas}" DisplayMemberPath="Value" SelectedValuePath="Key" Grid.Row="4" Grid.Column="3" SelectedValue="{Binding Path=DataContext.EventoOS}" />
 				</Grid>
 				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
 					<Button Width="16" Height="16" Click="EventoToggle">

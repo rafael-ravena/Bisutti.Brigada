@@ -206,7 +206,7 @@ namespace Bisutti.Brigada
 			{
 				if (Properties.Settings.Default.EventosExcelOrder == null)
 				{
-					Properties.Settings.Default.EventosExcelOrder = "0,1,2,3,4,5";
+					Properties.Settings.Default.EventosExcelOrder = "0,1,2,3,4,5,6,7";
 					Properties.Settings.Default.Save();
 				}
 				int[] ret = new int[Properties.Settings.Default.EventosExcelOrder.Split(',').Count()];

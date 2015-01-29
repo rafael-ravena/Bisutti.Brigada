@@ -72,6 +72,13 @@ namespace Bisutti.Brigada.Model
 				TerminoValue = (value.Hour * 60) + value.Minute;
 			}
 		}
+		public bool HasOS
+		{
+			get
+			{
+				return Anexo != null && Anexo.Length > 0;
+			}
+		}
 	}
 	public enum TipoEvento
 	{

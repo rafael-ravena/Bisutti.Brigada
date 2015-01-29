@@ -13,6 +13,7 @@ using System.Windows.Media;
 using Bisutti.Brigada.UserControls;
 using System.Runtime.CompilerServices;
 using System.Data;
+using System.Windows.Media.Imaging;
 
 namespace Bisutti.Brigada
 {
@@ -259,6 +260,19 @@ namespace Bisutti.Brigada
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			return (bool)value ? TrueValue : FalseValue;
+		}
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+	}
+	public class BoolToImageConverter : IValueConverter
+	{
+		public string FalsePath { get; set; }
+		public string TruePath { get; set; }
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return (bool)value ? TruePath : FalsePath;
 		}
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{

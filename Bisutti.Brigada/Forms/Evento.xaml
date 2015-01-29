@@ -12,6 +12,7 @@
 		<model:BoolToObjectConverter x:Key="ShowChapelaria" TrueValue="Chap. " FalseValue="" />
 		<model:BoolToObjectConverter x:Key="ShowRecepcao" TrueValue="Recep." FalseValue="" />
 		<model:EnumToStringConverter x:Key="ConvertFromEnum" />
+		<model:BoolToImageConverter x:Key="ShowOS" TruePath="../Images/ok.png" FalsePath="../Images/nok.png" />
 	</UserControl.Resources>
 	<DockPanel>
 		<Border DockPanel.Dock="Top" Style="{StaticResource PanelBorder}">
@@ -175,6 +176,13 @@
 										</DataTemplate>
 									</ListBox.ItemTemplate>
 								</ListBox>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="OS">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Image Source="{Binding Path=HasOS, Converter={StaticResource ShowOS}}" />
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>

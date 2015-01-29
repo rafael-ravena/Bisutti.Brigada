@@ -21,6 +21,7 @@ namespace Bisutti.Brigada
 	<b>Produtora:</b> {Produtora}<br />
 	<b>Casa:</b> {NomeCasa} ({EnderecoCasa})<br />
 	<b>Pagamento:</b> R$ {ValorPaga}
+	{Contatos}
 </p>
 ";
 		private const string producaoEventoBody = @"
@@ -122,6 +123,7 @@ Brigada: {Brigada}<br />
 			strRet = strRet.Replace("{NomeCasa}", evento.Localizacao.Nome);
 			strRet = strRet.Replace("{EnderecoCasa}", evento.Localizacao.Endereco);
 			strRet = strRet.Replace("{ValorPaga}", brigada.TipoBrigada.Paga.ToString("0.00"));
+			strRet = strRet.Replace("{Contatos}", GetContactList(evento.Colaboradores));
 			return strRet;
 		}
 		public static string GetDescricaoEventoProducao(Model.Evento evento)
@@ -139,6 +141,15 @@ Brigada: {Brigada}<br />
 			strBrigada = "<p style='margin-left:10px;'>" + strBrigada.Substring(6) + "</p>";
 			strRet = strRet.Replace("{Brigada}", strBrigada);
 			return strRet;
+		}
+		public static string GetContactList(List<Model.Brigada> list)
+		{
+			string ret = string.Empty;
+			foreach(Model.Brigada item in list)
+			{
+				ret += string.Format("<br />{0}: {1} ({2}).", item.TipoBrigada.Nome, item.Colaborador.Nome, item.Colaborador.Telefone);
+			}
+			return ret;
 		}
 	}
 }

@@ -150,7 +150,9 @@ namespace Bisutti.Brigada.Forms
 				{
 					emails += Mail.GetDescricaoEventoBrigada(c.Eventos[i].Evento, c.Eventos[i]);
 					if (c.Eventos[i].TipoBrigada.IncluiAnexo)
+					{
 						attachments.Add(c.Eventos[i].Evento.Anexo);
+					}
 				}
 				emails = Mail.GetBodyBrigada(c.Nome, emails);
 				Mail.SendEmail(ConfigurationFacade.FormatedBrigadaSubject, emails, c.Email, attachments, ConfigurationFacade.SendAutomatically);

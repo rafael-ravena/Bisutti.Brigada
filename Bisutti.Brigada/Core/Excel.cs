@@ -50,20 +50,22 @@ namespace Bisutti.Brigada.Core
 			foreach (DataRow dr in GetTable(filePath, sheet, FirstRowHeader).Rows)
 				eventos.Add(new Evento
 				{
-					Data =  dr.ColumnExists(ConfigurationFacade.BrigadaExcelOrder[0]) ?
+					Data = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[0]) ?
 						DateTime.Parse(dr[ConfigurationFacade.EventosExcelOrder[0]].ToString()) : DateTime.MinValue,
-					Contratante =  dr.ColumnExists(ConfigurationFacade.BrigadaExcelOrder[1]) ?
+					Contratante = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[1]) ?
 						dr[ConfigurationFacade.EventosExcelOrder[1]].ToString() : string.Empty,
-					Inicio =   dr.ColumnExists(ConfigurationFacade.BrigadaExcelOrder[2]) ?
+					Inicio = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[2]) ?
 						Horario.Parse(dr[ConfigurationFacade.EventosExcelOrder[2]].ToString()) : new Horario { Hora = 0, Minuto = 0 },
-					Termino =   dr.ColumnExists(ConfigurationFacade.BrigadaExcelOrder[3]) ?
+					Termino = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[3]) ?
 						Horario.Parse(dr[ConfigurationFacade.EventosExcelOrder[3]].ToString()) : new Horario { Hora = 0, Minuto = 0 },
-					ProdutoraId =   dr.ColumnExists(ConfigurationFacade.BrigadaExcelOrder[4]) ?
+					ProdutoraId = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[4]) ?
 						new Data.Produtora().GetByNome(dr[ConfigurationFacade.EventosExcelOrder[4]].ToString()).Id : 0,
-					LocalizacaoId =   dr.ColumnExists(ConfigurationFacade.BrigadaExcelOrder[5]) ?
+					LocalizacaoId = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[5]) ?
 						new Data.Localizacao().GetByName(dr[ConfigurationFacade.EventosExcelOrder[5]].ToString()).Id : 0,
-					TipoEvento =   dr.ColumnExists(ConfigurationFacade.BrigadaExcelOrder[0]) ?
-						(TipoEvento)Enum.Parse(typeof(TipoEvento), dr[ConfigurationFacade.EventosExcelOrder[6]].ToString(), true) : TipoEvento.Outro
+					TipoEvento = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[6]) ?
+						(TipoEvento)Enum.Parse(typeof(TipoEvento), dr[ConfigurationFacade.EventosExcelOrder[6]].ToString(), true) : TipoEvento.Outro,
+					Anexo = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[7]) ?
+						dr[ConfigurationFacade.EventosExcelOrder[7]].ToString() : string.Empty
 				});
 			return eventos;
 		}

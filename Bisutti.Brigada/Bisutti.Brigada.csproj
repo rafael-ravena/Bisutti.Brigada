@@ -272,6 +272,9 @@
     <Resource Include="Images\mail.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\produtores.png" />
+    <Resource Include="Images\nok.png" />
+    <Resource Include="Images\ok.png" />
     <Resource Include="Images\app.ico" />
     <Resource Include="1421881604_85502.ico" />
     <Content Include="Arquivos\Brigada.html">

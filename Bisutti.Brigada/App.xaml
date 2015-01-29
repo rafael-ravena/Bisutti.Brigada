@@ -4,6 +4,7 @@
              xmlns:viblendEditors="clr-namespace:VIBlend.WPF.Controls;assembly=VIBlend.WPF.Editors"
 			 xmlns:bbc="clr-namespace:Bisutti.Brigada.Core"
              StartupUri="MainWindow.xaml"
+			 Startup="ApplicationStartup"
 			 DispatcherUnhandledException="ExceptionThrown">
 	<Application.Resources>
 		<Style TargetType="TextBlock">
