@@ -10,7 +10,7 @@ namespace Bisutti.Brigada.Data
 	{
 		public override void Update(Model.TipoBrigada entity)
 		{
-			Model.TipoBrigada original = context.TiposBrigada.FirstOrDefault(l => l.Id == entity.Id);
+			Model.TipoBrigada original = context.TipoBrigada.FirstOrDefault(l => l.Id == entity.Id);
 			context.Entry(original).CurrentValues.SetValues(entity);
 			context.Entry(original).State = System.Data.Entity.EntityState.Modified;
 			context.SaveChanges();
@@ -23,13 +23,13 @@ namespace Bisutti.Brigada.Data
 
 		public override void Insert(Model.TipoBrigada entity)
 		{
-			context.TiposBrigada.Add(entity);
+			context.TipoBrigada.Add(entity);
 			context.SaveChanges();
 		}
 
 		protected override List<Model.TipoBrigada> GetCollection()
 		{
-			return context.TiposBrigada.OrderBy(t => t.Nome).ToList();
+			return context.TipoBrigada.OrderBy(t => t.Nome).ToList();
 		}
 	}
 }

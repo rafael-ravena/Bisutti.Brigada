@@ -34,18 +34,22 @@
 			</Button>
 			<Rectangle Fill="White" Opacity="80" />
 			<TextBlock Text="Menu" Style="{StaticResource BlockHeader}" />
-			<StackPanel Orientation="Vertical" Grid.Row="1" Background="White">
-				<Button Style="{StaticResource Casas}" Click="CasasClicked" />
-				<Button Style="{StaticResource Colaboradores}" Click="ColaboradoresClicked" />
-				<Button Style="{StaticResource Eventos}" Click="EventosClicked" />
-				<Button Style="{StaticResource Produtoras}" Click="ProdutorasClicked" />
-				<Button Style="{StaticResource TipoBrigada}" Click="BrigadaClicked" />
-				<Rectangle Style="{StaticResource MenuSeparator}" />
-				<Button Style="{StaticResource Acoes}" Click="AcoesClicked" Content="Envio de e-mails" Name="Acoes" />
-				<Button Style="{StaticResource Importacoes}" Click="ImportacoesClicked" Content="Importar de excel" Name="Importacoes" />
-				<Rectangle Style="{StaticResource MenuSeparator}" />
-				<Button Style="{StaticResource Configuracoes}" Click="ConfiguracoesClicked" />
-			</StackPanel>
+			<DockPanel Grid.Row="1" Background="White">
+				<Button DockPanel.Dock="Top" Style="{StaticResource DJ}" Click="DJClicked" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource Casas}" Click="CasasClicked" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource Colaboradores}" Click="ColaboradoresClicked" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource Eventos}" Click="EventosClicked" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource Manutencao}" Click="ManutencaoClicked" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource Produtoras}" Click="ProdutorasClicked" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource TipoBrigada}" Click="BrigadaClicked" />
+				<Rectangle DockPanel.Dock="Top" Style="{StaticResource MenuSeparator}" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource Acoes}" Click="AcoesClicked" Content="Envio de e-mails" Name="Acoes" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource Importacoes}" Click="ImportacoesClicked" Content="Importar de excel" Name="Importacoes" />
+				<Rectangle DockPanel.Dock="Top" Style="{StaticResource MenuSeparator}" />
+				<Button DockPanel.Dock="Top" Style="{StaticResource Configuracoes}" Click="ConfiguracoesClicked" />
+				<Button DockPanel.Dock="Bottom" Style="{StaticResource Incosistencias}" Click="InconsistenciasClicked" />
+				<TextBlock></TextBlock>
+			</DockPanel>
 		</Grid>
 	</DockPanel>
 </Window>

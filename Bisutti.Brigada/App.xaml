@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viblendEditors="clr-namespace:VIBlend.WPF.Controls;assembly=VIBlend.WPF.Editors"
 			 xmlns:bbc="clr-namespace:Bisutti.Brigada.Core"
-             StartupUri="MainWindow.xaml"
 			 Startup="ApplicationStartup"
+             StartupUri="MainWindow.xaml"
 			 DispatcherUnhandledException="ExceptionThrown">
 	<Application.Resources>
 		<Style TargetType="TextBlock">
@@ -109,11 +109,28 @@
 			<Setter Property="Foreground" Value="#333333" />
 			<Setter Property="Margin" Value="20,0" />
 		</Style>
+		<Style TargetType="TextBox" x:Key="Multiline">
+			<Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+			<Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+			<Setter Property="TextWrapping" Value="WrapWithOverflow" />
+			<Setter Property="AcceptsReturn" Value="True" />
+			<Setter Property="Margin" Value="1" />
+		</Style>
 		<Style TargetType="viblendEditors:DateTimeEditor">
 			<Setter Property="Margin" Value="1" />
 		</Style>
 		<Style TargetType="viblendEditors:DateTimePicker">
 			<Setter Property="Margin" Value="1" />
+		</Style>
+		<Style TargetType="StackPanel" x:Key="GridStackPanel">
+			<Setter Property="Orientation" Value="Vertical" />
+			<Setter Property="Margin" Value="-6,0" />
+			<Style.Resources>
+				<Style TargetType="TextBlock">
+					<Setter Property="HorizontalAlignment" Value="Left" />
+					<Setter Property="Margin" Value="2" />
+				</Style>
+			</Style.Resources>
 		</Style>
 		<Style TargetType="Button" x:Key="GeneralButton">
 			<Setter Property="Margin" Value="5" />
@@ -279,6 +296,45 @@
 									<Image Source="Images/configuracoes.png" Grid.Column="0" Stretch="Fill" Margin="5" />
 									<Border Background="#000099" Grid.Column="1" />
 									<TextBlock Foreground="#333333" Grid.Column="3" Text="Configurações" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="Button" x:Key="DJ">
+			<Setter Property="Cursor" Value="Hand" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid Height="35" Background="#FFFFFF" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="35" />
+								<ColumnDefinition Width="2" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Image Source="Images/dj.png" Grid.Column="0" Stretch="Fill" Margin="5" />
+							<Border Background="#990000" Grid.Column="1" />
+							<TextBlock Text="DJs" Foreground="#333333" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="Button">
+								<Grid Height="35" Background="#DFDFFF" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="35" />
+										<ColumnDefinition Width="2" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<Image Source="Images/dj.png" Grid.Column="0" Stretch="Fill" Margin="5" />
+									<Border Background="#000099" Grid.Column="1" />
+									<TextBlock Text="DJs" Foreground="#333333" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
 								</Grid>
 							</ControlTemplate>
 						</Setter.Value>
@@ -552,6 +608,84 @@
 									<Image Source="Images/importacoes.png" Grid.Column="0" Stretch="Fill" Margin="5" />
 									<Border Background="#000099" Grid.Column="1" />
 									<TextBlock Text="{TemplateBinding Button.Content}" Foreground="#333333" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="Button" x:Key="Manutencao">
+			<Setter Property="Cursor" Value="Hand" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid Height="35" Background="#FFFFFF" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="35" />
+								<ColumnDefinition Width="2" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Image Source="Images/manutencao.png" Grid.Column="0" Stretch="Fill" Margin="5" />
+							<Border Background="#990000" Grid.Column="1" />
+							<TextBlock Text="Manutenção" Foreground="#333333" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="Button">
+								<Grid Height="35" Background="#DFDFFF" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="35" />
+										<ColumnDefinition Width="2" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<Image Source="Images/manutencao.png" Grid.Column="0" Stretch="Fill" Margin="5" />
+									<Border Background="#000099" Grid.Column="1" />
+									<TextBlock Text="Manutenção" Foreground="#333333" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="Button" x:Key="Incosistencias">
+			<Setter Property="Cursor" Value="Hand" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid Height="35" Background="#FFFFFF" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="35" />
+								<ColumnDefinition Width="2" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Image Source="Images/docErro.png" Grid.Column="0" Stretch="Fill" Margin="5" />
+							<Border Background="#990000" Grid.Column="1" />
+							<TextBlock Text="Inconsistências" Foreground="#333333" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="Button">
+								<Grid Height="35" Background="#DFDFFF" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}}">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="35" />
+										<ColumnDefinition Width="2" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<Image Source="Images/docErro.png" Grid.Column="0" Stretch="Fill" Margin="5" />
+									<Border Background="#000099" Grid.Column="1" />
+									<TextBlock Text="Inconsistências" Foreground="#333333" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" />
 								</Grid>
 							</ControlTemplate>
 						</Setter.Value>

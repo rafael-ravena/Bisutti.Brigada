@@ -81,6 +81,7 @@
     </ApplicationDefinition>
     <Compile Include="Core\ConfigurationFacade.cs" />
     <Compile Include="Core\Excel.cs" />
+    <Compile Include="Core\Listener.cs" />
     <Compile Include="Core\Mail.cs" />
     <Compile Include="Core\SharedMethods.cs" />
     <Compile Include="Data\Brigada.cs" />
@@ -88,7 +89,9 @@
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\DataAccessBase.cs" />
     <Compile Include="Data\Evento.cs" />
+    <Compile Include="Data\Inconsistencia.cs" />
     <Compile Include="Data\Localizacao.cs" />
+    <Compile Include="Data\Manutencao.cs" />
     <Compile Include="Data\Produtora.cs" />
     <Compile Include="Data\SampleData.cs" />
     <Compile Include="Data\TipoBrigada.cs" />
@@ -110,6 +113,10 @@
     <Compile Include="Forms\Configuracoes.xaml.cs">
       <DependentUpon>Configuracoes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\DJ.cs" />
+    <Compile Include="Forms\DJs.xaml.cs">
+      <DependentUpon>DJs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Evento.xaml.cs">
       <DependentUpon>Evento.xaml</DependentUpon>
     </Compile>
@@ -120,6 +127,12 @@
     <Compile Include="Forms\Produtora.xaml.cs">
       <DependentUpon>Produtora.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inconsistencias.xaml.cs">
+      <DependentUpon>Inconsistencias.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DJ.cs" />
+    <Compile Include="Model\Inconsistencia.cs" />
+    <Compile Include="Model\Manutencao.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UserControls\CurrencyTextBox.cs" />
     <Page Include="ErrorWindow.xaml">
@@ -146,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\DJs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\Evento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\Produtora.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inconsistencias.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,6 +293,9 @@
     <Resource Include="Images\mail.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\docErro.png" />
+    <Resource Include="Images\dj.png" />
+    <Resource Include="Images\manutencao.png" />
     <Resource Include="Images\produtores.png" />
     <Resource Include="Images\nok.png" />
     <Resource Include="Images\ok.png" />

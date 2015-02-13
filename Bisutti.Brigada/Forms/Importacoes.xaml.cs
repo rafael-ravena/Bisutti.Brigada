@@ -188,9 +188,9 @@ namespace Bisutti.Brigada.Forms
 			}
 			set
 			{
-				ConfigurationFacade.EventosExcelOrder = new int[8] {
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
 					value, EventoContratante, EventoInicio, EventoTermino,
-					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS
+					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS, EventoDJ
 				};
 			}
 		}
@@ -202,9 +202,9 @@ namespace Bisutti.Brigada.Forms
 			}
 			set
 			{
-				ConfigurationFacade.EventosExcelOrder = new int[8] {
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
 					EventoData, value, EventoInicio, EventoTermino,
-					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS
+					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS, EventoDJ
 				};
 			}
 		}
@@ -216,9 +216,9 @@ namespace Bisutti.Brigada.Forms
 			}
 			set
 			{
-				ConfigurationFacade.EventosExcelOrder = new int[8] {
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
 					EventoData, EventoContratante, value, EventoTermino,
-					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS
+					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS, EventoDJ
 				};
 			}
 		}
@@ -230,9 +230,9 @@ namespace Bisutti.Brigada.Forms
 			}
 			set
 			{
-				ConfigurationFacade.EventosExcelOrder = new int[8] {
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
 					EventoData, EventoContratante, EventoInicio, value,
-					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS
+					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS, EventoDJ
 				};
 			}
 		}
@@ -244,9 +244,9 @@ namespace Bisutti.Brigada.Forms
 			}
 			set
 			{
-				ConfigurationFacade.EventosExcelOrder = new int[8] {
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
 					EventoData, EventoContratante, EventoInicio, EventoTermino,
-					value, EventoLocalizacao, EventoTipo, EventoOS
+					value, EventoLocalizacao, EventoTipo, EventoOS, EventoDJ
 				};
 			}
 		}
@@ -258,9 +258,9 @@ namespace Bisutti.Brigada.Forms
 			}
 			set
 			{
-				ConfigurationFacade.EventosExcelOrder = new int[8] {
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
 					EventoData, EventoContratante, EventoInicio, EventoTermino,
-					EventoProdutora, value, EventoTipo, EventoOS
+					EventoProdutora, value, EventoTipo, EventoOS, EventoDJ
 				};
 			}
 		}
@@ -272,9 +272,9 @@ namespace Bisutti.Brigada.Forms
 			}
 			set
 			{
-				ConfigurationFacade.EventosExcelOrder = new int[8] {
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
 					EventoData, EventoContratante, EventoInicio, EventoTermino,
-					EventoProdutora, EventoLocalizacao, value, EventoOS
+					EventoProdutora, EventoLocalizacao, value, EventoOS, EventoDJ
 				};
 			}
 		}
@@ -286,9 +286,23 @@ namespace Bisutti.Brigada.Forms
 			}
 			set
 			{
-				ConfigurationFacade.EventosExcelOrder = new int[8] {
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
 					EventoData, EventoContratante, EventoInicio, EventoTermino,
-					EventoProdutora, EventoLocalizacao, EventoTipo, value
+					EventoProdutora, EventoLocalizacao, EventoTipo, value, EventoDJ
+				};
+			}
+		}
+		public int EventoDJ
+		{
+			get
+			{
+				return ConfigurationFacade.EventosExcelOrder[8];
+			}
+			set
+			{
+				ConfigurationFacade.EventosExcelOrder = new int[9] {
+					EventoData, EventoContratante, EventoInicio, EventoTermino,
+					EventoProdutora, EventoLocalizacao, EventoTipo, EventoOS, value
 				};
 			}
 		}

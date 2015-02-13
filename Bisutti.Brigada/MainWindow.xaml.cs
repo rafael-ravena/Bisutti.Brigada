@@ -64,27 +64,43 @@ namespace Bisutti.Brigada
 			{
 				case "Acoes":
 					CurrentControl = new Forms.Acoes();
+					this.Title = "Envio de e-mails à brigada no período";
 					break;
 				case "Casas":
 					CurrentControl = new Forms.Casa();
+					this.Title = "Gerenciamento das casas (localidades)";
 					break;
 				case "Colaboradores":
 					CurrentControl = new Forms.Colaborador();
+					this.Title = "Gerenciamento dos colaboradores (brigada)";
 					break;
 				case "Configuracoes":
 					CurrentControl = new Forms.Configuracoes();
+					this.Title = "Configurações básicas";
 					break;
 				case "Importacoes":
 					CurrentControl = new Forms.Importacoes();
+					this.Title = "Importação de planilhas excel para o aplicativo";
 					break;
 				case "Eventos":
 					CurrentControl = new Forms.Evento();
+					this.Title = "Gerenciamento dos eventos no período";
 					break;
 				case "Produtoras":
 					CurrentControl = new Forms.Produtora();
+					this.Title = "Gerenciamento das produtoras (atendentes)";
 					break;
 				case "Brigada":
 					CurrentControl = new Forms.Brigada();
+					this.Title = "Gerenciamento dos tipos de brigada";
+					break;
+				case "Manutenção":
+					CurrentControl = new Forms.Produtora();
+					this.Title = "Gerenciamento dos plantonistas da manutenção por data";
+					break;
+				case "DJs":
+					CurrentControl = new Forms.DJs();
+					this.Title = "Gerenciamento dos DJs";
 					break;
 				default:
 					return;
@@ -92,6 +108,14 @@ namespace Bisutti.Brigada
 			if (ConfigurationFacade.SaveLastScreen)
 				ConfigurationFacade.LastScreen = which;
 			ContentPanel.Children.Add(CurrentControl);
+		}
+		private void DJClicked(object sender, RoutedEventArgs e)
+		{
+			SwitchMainControl("DJs");
+		}
+		private void ManutencaoClicked(object sender, RoutedEventArgs e)
+		{
+			SwitchMainControl("Manutenção");
 		}
 		private void AcoesClicked(object sender, RoutedEventArgs e)
 		{
@@ -124,6 +148,11 @@ namespace Bisutti.Brigada
 		private void ImportacoesClicked(object sender, RoutedEventArgs e)
 		{
 			SwitchMainControl("Importacoes");
+		}
+		private void InconsistenciasClicked(object sender, RoutedEventArgs e)
+		{
+			Inconsistencias wdn = new Inconsistencias(this);
+			wdn.Show();
 		}
 		public enum MenuState
 		{

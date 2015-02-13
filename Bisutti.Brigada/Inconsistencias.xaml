@@ -1,0 +1,24 @@
+﻿<Window x:Class="Bisutti.Brigada.Inconsistencias"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Inconsistências no período"
+		Height="100" Width="500"
+		SizeToContent="WidthAndHeight">
+    <Grid>
+		<ListView ItemsSource="{Binding DataContext.Collection}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Onde" DisplayMemberBinding="{Binding Path=Source}" />
+					<GridViewColumn Header="Erro" DisplayMemberBinding="{Binding Path=Message}" />
+					<GridViewColumn Header="Corrigir">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource EditButton}" PreviewMouseLeftButtonUp="CorrectClicked" Content="Editar" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+				</GridView>
+			</ListView.View>
+		</ListView>
+    </Grid>
+</Window>

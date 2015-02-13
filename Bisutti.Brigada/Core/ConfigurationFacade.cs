@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Windows;
 
 namespace Bisutti.Brigada
 {
@@ -206,7 +207,7 @@ namespace Bisutti.Brigada
 			{
 				if (Properties.Settings.Default.EventosExcelOrder == null)
 				{
-					Properties.Settings.Default.EventosExcelOrder = "0,1,2,3,4,5,6,7";
+					Properties.Settings.Default.EventosExcelOrder = "0,1,2,3,4,5,6,7,8";
 					Properties.Settings.Default.Save();
 				}
 				int[] ret = new int[Properties.Settings.Default.EventosExcelOrder.Split(',').Count()];

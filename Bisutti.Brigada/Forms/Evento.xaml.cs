@@ -29,6 +29,10 @@ namespace Bisutti.Brigada.Forms
 			Colaboradores = new Data.Colaborador().GetCollection(0);
 			Localizacoes = new Data.Localizacao().GetCollection(0);
 			Produtoras = new Data.Produtora().GetCollection(0);
+			DJs = new Data.DJ().GetCollection(0);
+			ColaboradoresAtribuidos = new List<ColaboradorAtribuido>();
+			foreach (Model.Colaborador c in new Data.Colaborador().GetBrigadaPeriodo(FilterInicial, FilterFinal))
+				ColaboradoresAtribuidos.Add(new ColaboradorAtribuido { Nome = c.Nome, Count = c.Eventos.Count });
 			ClearFilterClicked(new object(), new RoutedEventArgs());
 		}
 		private void ToggleVisibility(Grid grid, Image img)
@@ -115,14 +119,10 @@ namespace Bisutti.Brigada.Forms
 		}
 		private void ClearFilterClicked(object sender, RoutedEventArgs e)
 		{
-			FilterInicial = DateTime.Now;
-			FilterFinal = DateTime.Now.AddDays(7);
 			FilterLocal = 0;
 			FilterProdutora = 0;
 			cboFilterLocal.SelectedIndex = -1;
 			cboFilterProdutora.SelectedIndex = -1;
-			txbFilterInicial.GetBindingExpression(VIBlend.WPF.Controls.DateTimePicker.SelectedDateProperty).UpdateTarget();
-			txbFilterFinal.GetBindingExpression(VIBlend.WPF.Controls.DateTimePicker.SelectedDateProperty).UpdateTarget();
 			cboFilterLocal.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateTarget();
 			cboFilterProdutora.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateTarget();
 		}
@@ -135,12 +135,34 @@ namespace Bisutti.Brigada.Forms
 				TxbAnexo.UpdateTarget();
 			}
 		}
-		public DateTime FilterInicial { get; set; }
-		public DateTime FilterFinal { get; set; }
+		public DateTime FilterInicial
+		{
+			get
+			{
+				return ConfigurationFacade.Inicio;
+			}
+			set
+			{
+				ConfigurationFacade.Inicio = value;
+			}
+		}
+		public DateTime FilterFinal
+		{
+			get
+			{
+				return ConfigurationFacade.Termino;
+			}
+			set
+			{
+				ConfigurationFacade.Termino = value;
+			}
+		}
 		public int FilterLocal { get; set; }
 		public int FilterProdutora { get; set; }
+		public List<Model.DJ> DJs { get; set; }
 		public List<Model.TipoBrigada> Brigadas { get; set; }
 		public List<Model.Colaborador> Colaboradores { get; set; }
+		public List<ColaboradorAtribuido> ColaboradoresAtribuidos { get; set; }
 		public List<Model.Localizacao> Localizacoes { get; set; }
 		public List<Model.Produtora> Produtoras { get; set; }
 		public Dictionary<string, int> tipos;
@@ -232,6 +254,10 @@ namespace Bisutti.Brigada.Forms
 		{
 			Collection = new Data.Evento().Filter(FilterInicial, FilterFinal, FilterProdutora, FilterLocal);
 			Element = new Model.Evento { Data = DateTime.Today, InicioValue = 19 * 60, TerminoValue = 4 * 60 };
+			ColaboradoresAtribuidos = new List<ColaboradorAtribuido>();
+			foreach (Model.Colaborador c in new Data.Colaborador().GetBrigadaPeriodo(FilterInicial, FilterFinal))
+				ColaboradoresAtribuidos.Add(new ColaboradorAtribuido { Nome = c.Nome, Count = c.Eventos.Count });
+			ColaboradoresAtribuidos = ColaboradoresAtribuidos.OrderBy(c => c.Nome).OrderByDescending(c => c.Count).ToList();
 		}
 		public void RefreshBindings()
 		{
@@ -243,9 +269,17 @@ namespace Bisutti.Brigada.Forms
 			cboLocalizacao.Update();
 			cboProdutora.Update();
 			cboTipoEvento.Update();
+			cboDJ.Update();
 			TxbContratante.Update();
 			TxbAnexo.Update();
+			TxbComentarios.Update();
 			LstEventos.Update();
+			LstColaboradoresAtribuidos.Update();
 		}
+	}
+	public class ColaboradorAtribuido
+	{
+		public int Count { get; set; }
+		public string Nome { get; set; }
 	}
 }

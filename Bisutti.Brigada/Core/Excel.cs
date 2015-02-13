@@ -64,6 +64,8 @@ namespace Bisutti.Brigada.Core
 						new Data.Localizacao().GetByName(dr[ConfigurationFacade.EventosExcelOrder[5]].ToString()).Id : 0,
 					TipoEvento = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[6]) ?
 						(TipoEvento)Enum.Parse(typeof(TipoEvento), dr[ConfigurationFacade.EventosExcelOrder[6]].ToString(), true) : TipoEvento.Outro,
+					DJId = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[8]) ?
+						new Data.DJ().GetByName(dr[ConfigurationFacade.EventosExcelOrder[5]].ToString()).Id : 0,
 					Anexo = dr.ColumnExists(ConfigurationFacade.EventosExcelOrder[7]) ?
 						dr[ConfigurationFacade.EventosExcelOrder[7]].ToString() : string.Empty
 				});
@@ -139,6 +141,10 @@ namespace Bisutti.Brigada.Core
 			if (text.ToLower().Replace("dom", "") != text.ToLower())
 				return DisponibilidadeDiaria.Dom;
 			return DisponibilidadeDiaria.Fds;
+		}
+		private static bool IsEventoRow(DataRow dr)
+		{
+			return false;
 		}
 	}
 }

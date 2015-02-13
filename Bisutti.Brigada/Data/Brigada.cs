@@ -20,17 +20,17 @@ namespace Bisutti.Brigada.Data
 
 		public override void Insert(Model.Brigada entity)
 		{
-			context.Brigadas.Add(entity);
+			context.Brigada.Add(entity);
 			context.SaveChanges();
 		}
 
 		protected override List<Model.Brigada> GetCollection()
 		{
-			return context.Brigadas.ToList();
+			return context.Brigada.ToList();
 		}
 		public int[] GetBrigadasId(int eventoId)
 		{
-			return context.Brigadas.Where(b => b.EventoId == eventoId).Select(b => b.Id).ToArray<int>();
+			return context.Brigada.Where(b => b.EventoId == eventoId).Select(b => b.Id).ToArray<int>();
 		}
 	}
 }

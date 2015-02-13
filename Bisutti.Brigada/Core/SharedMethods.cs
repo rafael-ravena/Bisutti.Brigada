@@ -189,6 +189,13 @@ namespace Bisutti.Brigada
 			if (control.GetBindingExpression(ListView.ItemsSourceProperty) != null)
 				control.GetBindingExpression(ListView.ItemsSourceProperty).UpdateTarget();
 		}
+		public static void Update(this ListBox control)
+		{
+			if (control.GetBindingExpression(ListBox.ItemsSourceProperty) != null)
+				control.GetBindingExpression(ListBox.ItemsSourceProperty).UpdateSource();
+			if (control.GetBindingExpression(ListBox.ItemsSourceProperty) != null)
+				control.GetBindingExpression(ListBox.ItemsSourceProperty).UpdateTarget();
+		}
 		public static void Update(this CheckBox control)
 		{
 			if (control.GetBindingExpression(CheckBox.IsCheckedProperty) != null)

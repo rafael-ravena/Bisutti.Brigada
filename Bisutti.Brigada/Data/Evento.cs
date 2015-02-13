@@ -10,7 +10,7 @@ namespace Bisutti.Brigada.Data
 	{
 		public override void Update(Model.Evento entity)
 		{
-			Model.Evento original = context.Eventos.Include("Colaboradores").FirstOrDefault(l => l.Id == entity.Id);
+			Model.Evento original = context.Evento.Include("Colaboradores").FirstOrDefault(l => l.Id == entity.Id);
 			context.Entry(original).CurrentValues.SetValues(entity);
 			context.Entry(original).State = System.Data.Entity.EntityState.Modified;
 			context.SaveChanges();
@@ -21,12 +21,12 @@ namespace Bisutti.Brigada.Data
 		}
 		public override void Insert(Model.Evento entity)
 		{
-			context.Eventos.Add(entity);
+			context.Evento.Add(entity);
 			context.SaveChanges();
 		}
 		protected override List<Model.Evento> GetCollection()
 		{
-			return context.Eventos
+			return context.Evento
 				.Include("Produtora")
 				.Include("Localizacao")
 				.Include("Colaboradores").Include("Colaboradores.Colaborador").Include("Colaboradores.TipoBrigada")
@@ -36,9 +36,10 @@ namespace Bisutti.Brigada.Data
 		}
 		public List<Model.Evento> Filter(DateTime inicio, DateTime termino, int produtoraId, int localizacaoId)
 		{
-			return context.Eventos
+			return context.Evento
 				.Include("Produtora")
 				.Include("Localizacao")
+				.Include("DJ")
 				.Include("Colaboradores").Include("Colaboradores.Colaborador").Include("Colaboradores.TipoBrigada")
 				.Where(e => 
 					(e.Data.CompareTo(inicio) >= 0 && e.Data.CompareTo(termino) <= 0) &&
@@ -52,7 +53,7 @@ namespace Bisutti.Brigada.Data
 		}
 		public void InsertRange(List<Model.Evento> importar)
 		{
-			context.Eventos.AddRange(importar);
+			context.Evento.AddRange(importar);
 			context.SaveChanges();
 		}
 	}

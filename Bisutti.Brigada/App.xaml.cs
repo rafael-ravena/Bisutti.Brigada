@@ -20,6 +20,7 @@ namespace Bisutti.Brigada
 	/// </summary>
 	public partial class App : Application
 	{
+
 		public App()
 		{
 		}
@@ -37,6 +38,12 @@ namespace Bisutti.Brigada
 			EventManager.RegisterClassHandler(typeof(CurrencyTextBox), CurrencyTextBox.KeyDownEvent, new KeyEventHandler(KeyPressed));
 			EventManager.RegisterClassHandler(typeof(vib.DateTimeEditor), vib.DateTimeEditor.PreviewKeyDownEvent, new KeyEventHandler(KeyPressed));
 			EventManager.RegisterClassHandler(typeof(vib.DateTimePicker), vib.DateTimePicker.PreviewKeyDownEvent, new KeyEventHandler(KeyPressed));
+		}
+		private void Diagnostic()
+		{
+			new Core.Listener().FindInconsistency(ConfigurationFacade.Inicio, ConfigurationFacade.Termino);
+			Thread.Sleep(60000);
+			Diagnostic();
 		}
 		private void KeyPressed(object sender, KeyEventArgs e)
 		{

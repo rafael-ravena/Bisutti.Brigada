@@ -16,10 +16,13 @@ namespace Bisutti.Brigada.Model
 		public DateTime Data { get; set; }
 		public int InicioValue { get; set; }
 		public int TerminoValue { get; set; }
+		public string Comentarios { get; set; }
 		public int LocalizacaoId { get; set; }
 		public Localizacao Localizacao { get; set; }
 		public int ProdutoraId { get; set; }
 		public Produtora Produtora { get; set; }
+		public int DJId { get; set; }
+		public DJ DJ { get; set; }
 		public int TipoEventoId { get; set; }
 		public TipoEvento TipoEvento
 		{
@@ -76,7 +79,7 @@ namespace Bisutti.Brigada.Model
 		{
 			get
 			{
-				return Anexo != null && Anexo.Length > 0;
+				return Anexo != null && Anexo.Length > 0 && System.IO.File.Exists(Anexo);
 			}
 		}
 	}

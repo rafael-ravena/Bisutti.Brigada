@@ -10,7 +10,7 @@ namespace Bisutti.Brigada.Data
 	{
 		public override void Update(Model.Localizacao entity)
 		{
-			Model.Localizacao original = context.Localizacoes.FirstOrDefault(l => l.Id == entity.Id);
+			Model.Localizacao original = context.Localizacao.FirstOrDefault(l => l.Id == entity.Id);
 			context.Entry(original).CurrentValues.SetValues(entity);
 			context.Entry(original).State = System.Data.Entity.EntityState.Modified;
 			context.SaveChanges();
@@ -23,13 +23,13 @@ namespace Bisutti.Brigada.Data
 
 		public override void Insert(Model.Localizacao entity)
 		{
-			context.Localizacoes.Add(entity);
+			context.Localizacao.Add(entity);
 			context.SaveChanges();
 		}
 
 		protected override List<Model.Localizacao> GetCollection()
 		{
-			return context.Localizacoes.OrderBy(l => l.Nome).ToList();
+			return context.Localizacao.OrderBy(l => l.Nome).ToList();
 		}
 
 		public Model.Localizacao GetByName(string sigla)

@@ -38,11 +38,14 @@ namespace Bisutti.Brigada.Data
 				.WithRequired(c => c.Evento)
 				.WillCascadeOnDelete(true);
 		}
-		public DbSet<Model.Brigada> Brigadas { get; set; }
-		public DbSet<Model.Colaborador> Colaboradores { get; set; }
-		public DbSet<Model.Evento> Eventos { get; set; }
-		public DbSet<Model.Localizacao> Localizacoes { get; set; }
-		public DbSet<Model.Produtora> Produtoras { get; set; }
-		public DbSet<Model.TipoBrigada> TiposBrigada { get; set; }
+		public DbSet<Model.Brigada> Brigada { get; set; }
+		public DbSet<Model.Colaborador> Colaborador { get; set; }
+		public DbSet<Model.Evento> Evento { get; set; }
+		public DbSet<Model.Localizacao> Localizacao { get; set; }
+		public DbSet<Model.Produtora> Produtora { get; set; }
+		public DbSet<Model.TipoBrigada> TipoBrigada { get; set; }
+		public DbSet<Model.DJ> DJ { get; set; }
+		public DbSet<Model.Manutencao> Manutencao { get; set; }
+		public DbSet<Model.Inconsistencia> Inconsistencia { get; set; }
 	}
 }

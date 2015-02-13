@@ -11,7 +11,7 @@ namespace Bisutti.Brigada.Data
 	{
 		public override void Update(Model.Colaborador entity)
 		{
-			Model.Colaborador original = context.Colaboradores.FirstOrDefault(l => l.Id == entity.Id);
+			Model.Colaborador original = context.Colaborador.FirstOrDefault(l => l.Id == entity.Id);
 			context.Entry(original).CurrentValues.SetValues(entity);
 			context.Entry(original).State = System.Data.Entity.EntityState.Modified;
 			context.SaveChanges();
@@ -22,16 +22,16 @@ namespace Bisutti.Brigada.Data
 		}
 		public override void Insert(Model.Colaborador entity)
 		{
-			context.Colaboradores.Add(entity);
+			context.Colaborador.Add(entity);
 			context.SaveChanges();
 		}
 		protected override List<Model.Colaborador> GetCollection()
 		{
-			return context.Colaboradores.OrderBy(c => c.Nome).ToList();
+			return context.Colaborador.OrderBy(c => c.Nome).ToList();
 		}
 		public List<Model.Colaborador> Filter(string nome, string email, string telefone)
 		{
-			return context.Colaboradores.OrderBy(c => c.Nome).Where(c =>
+			return context.Colaborador.OrderBy(c => c.Nome).Where(c =>
 				(c.Nome.ToLower().IndexOf(nome.ToLower()) == 0 || nome.Length <= 3) &&
 				(c.Email.ToLower().IndexOf(email.ToLower()) == 0 || email.Length <= 3) &&
 				(c.Telefone.ToLower().IndexOf(telefone.ToLower()) == 0 || telefone.Length <= 3)
@@ -39,10 +39,11 @@ namespace Bisutti.Brigada.Data
 		}
 		public List<Model.Colaborador> GetBrigada(DateTime inicio, DateTime termino)
 		{
-			List<Model.Colaborador> colaboradores = context.Colaboradores
+			List<Model.Colaborador> colaboradores = context.Colaborador
 				.Include(c => c.Eventos)
 				.Include(c => c.Eventos.Select(e => e.TipoBrigada))
 				.Include(c => c.Eventos.Select(e => e.Evento))
+				.Include(c => c.Eventos.Select(e => e.Evento.DJ))
 				.Include(c => c.Eventos.Select(e => e.Evento.Colaboradores))
 				.Include(c => c.Eventos.Select(e => e.Evento.Colaboradores.Select(b => b.Colaborador)))
 				.Include(c => c.Eventos.Select(e => e.Evento.Colaboradores.Select(b => b.TipoBrigada)))
@@ -64,7 +65,7 @@ namespace Bisutti.Brigada.Data
 			if (disponibilidadeDiaria != null)
 				idDisponibilidadeDiaria = (int)disponibilidadeDiaria;
 			List<Model.Colaborador> colaboradores = new List<Model.Colaborador>();
-			foreach (Model.Colaborador c in context.Colaboradores)
+			foreach (Model.Colaborador c in context.Colaborador)
 				if (
 					((c.Nome != string.Empty && nome != string.Empty && c.Nome.ToLower().Replace(nome.ToLower(), "") != c.Nome.ToLower()) || nome == string.Empty)
 					&& (c.DisponivelCerimonial || !dispCerimonial) && (c.DisponivelChapelaria || !dispChapelaria) && (c.DisponivelRecepcao || !dispRecepcao) && (c.DisponivelProducao || !dispProducao)
@@ -75,8 +76,24 @@ namespace Bisutti.Brigada.Data
 		}
 		public void InsertRange(List<Model.Colaborador> colaboradores)
 		{
-			context.Colaboradores.AddRange(colaboradores);
+			context.Colaborador.AddRange(colaboradores);
 			context.SaveChanges();
+		}
+		public List<Model.Colaborador> GetBrigadaPeriodo(DateTime inicio, DateTime termino)
+		{
+			IEnumerable<Model.Colaborador> colaboradores = context.Colaborador
+				.Include(c => c.Eventos)
+				.Include(c => c.Eventos.Select(e => e.Evento))
+				.Where(c => c.Eventos.Where(b => b.Evento.Data.CompareTo(inicio) >= 0 && b.Evento.Data.CompareTo(termino) <= 0).Count() > 0)
+				.OrderBy(c => c.Nome);
+			foreach (Model.Colaborador c in colaboradores)
+			{
+				c.Eventos = c.Eventos.Where(e =>
+					e.Evento.Data.ToUniversalTime() >= inicio.ToUniversalTime() &&
+					e.Evento.Data.ToUniversalTime() <= termino.ToUniversalTime())
+					.OrderBy(e => e.Evento.Data).ToList();
+			}
+			return colaboradores.ToList();
 		}
 	}
 }

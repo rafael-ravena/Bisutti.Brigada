@@ -11,7 +11,7 @@ namespace Bisutti.Brigada.Data
 	{
 		public override void Update(Model.Produtora entity)
 		{
-			Model.Produtora original = context.Produtoras.FirstOrDefault(l => l.Id == entity.Id);
+			Model.Produtora original = context.Produtora.FirstOrDefault(l => l.Id == entity.Id);
 			context.Entry(original).CurrentValues.SetValues(entity);
 			context.Entry(original).State = System.Data.Entity.EntityState.Modified;
 			context.SaveChanges();
@@ -24,13 +24,13 @@ namespace Bisutti.Brigada.Data
 
 		public override void Insert(Model.Produtora entity)
 		{
-			context.Produtoras.Add(entity);
+			context.Produtora.Add(entity);
 			context.SaveChanges();
 		}
 
 		protected override List<Model.Produtora> GetCollection()
 		{
-			return context.Produtoras.OrderBy(p => p.Nome).ToList();
+			return context.Produtora.OrderBy(p => p.Nome).ToList();
 		}
 		public Model.Produtora GetByNome(string nome)
 		{
@@ -40,7 +40,7 @@ namespace Bisutti.Brigada.Data
 		internal List<Model.Produtora> GetBrigada(DateTime dataInicio, DateTime dataTermino)
 		{
 			List<Model.Produtora> produtoras =
-				context.Produtoras
+				context.Produtora
 				.Include(p => p.Eventos)
 				.Include(p => p.Eventos.Select(e => e.Localizacao))
 				.Include(p => p.Eventos.Select(e => e.Colaboradores))
