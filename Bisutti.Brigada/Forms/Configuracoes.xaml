@@ -19,11 +19,24 @@
 						<RowDefinition Height="30" />
 						<RowDefinition Height="25" />
 						<RowDefinition Height="25" />
+						<RowDefinition Height="35" />
+						<RowDefinition Height="25" />
+						<RowDefinition Height="65" />
 					</Grid.RowDefinitions>
 					<TextBlock Grid.Row="1">Email do desenvolvedor:</TextBlock>
 					<TextBlock Grid.Row="2">Salvar última página visitada:</TextBlock>
+					<TextBlock Grid.Row="3">Limpar dados obsoletos:</TextBlock>
+					<TextBlock Style="{StaticResource IdentedBlock}" Grid.Row="5" Grid.Column="1">
+							<Span FontWeight="Bold">&#8226;Limpeza:</Span><LineBreak />
+							Os dados de eventos e plantões de manutenção referentes à datas anteriores a um mês (contando a partir de hoje ou do início do filtro de data) serão excluidos.
+					</TextBlock>
 					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=DataContext.DevelopersEmail}" />
 					<CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding Path=DataContext.SaveLastPage}" />
+					<StackPanel Orientation="Vertical" Grid.Row="3" Grid.Column="1">
+						<RadioButton>Hoje</RadioButton>
+						<RadioButton>Início do filtro de data</RadioButton>
+					</StackPanel>
+					<Button Style="{StaticResource CleanButton}" Grid.Row="4" Grid.Column="1">Executar limpeza</Button>
 				</Grid>
 				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
 					<Button Width="16" Height="16" Click="AplicativoToggle">

@@ -161,7 +161,7 @@
 					</StackPanel>
 				</Grid>
 				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
-					<Button Width="16" Height="16" Click="BrigadaToggle">
+					<Button Width="16" Height="16" Click="ImportacoesToggle">
 						<Image Name="ImgImportacoes" Source="../Images/up.png" />
 					</Button>
 				</StackPanel>

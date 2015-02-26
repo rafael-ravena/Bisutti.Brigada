@@ -23,11 +23,13 @@ namespace Bisutti.Brigada
 		public MainWindow()
 		{
 			InitializeComponent();
+			DataContext = this;
 			State = MenuState.Expanded;
 			ExpandOrCollapse();
 			SwitchMainControl(ConfigurationFacade.LastScreen);
 			this.WindowState = System.Windows.WindowState.Maximized;
 		}
+		public int CurrentId { get; set; }
 		public UserControl CurrentControl { get; set; }
 		public string CurrentAction { get; set; }
 		public MenuState State { get; set; }
@@ -95,7 +97,7 @@ namespace Bisutti.Brigada
 					this.Title = "Gerenciamento dos tipos de brigada";
 					break;
 				case "Manutenção":
-					CurrentControl = new Forms.Produtora();
+					CurrentControl = new Forms.Manutencao();
 					this.Title = "Gerenciamento dos plantonistas da manutenção por data";
 					break;
 				case "DJs":
@@ -108,6 +110,23 @@ namespace Bisutti.Brigada
 			if (ConfigurationFacade.SaveLastScreen)
 				ConfigurationFacade.LastScreen = which;
 			ContentPanel.Children.Add(CurrentControl);
+		}
+		private void ToggleVisibility(ListView grid, Image img)
+		{
+			BitmapImage image = new BitmapImage();
+			image.BeginInit();
+			if (grid.Visibility == Visibility.Visible)
+			{
+				image.UriSource = new Uri("/Images/down.png", UriKind.Relative);
+				grid.Visibility = Visibility.Collapsed;
+			}
+			else
+			{
+				image.UriSource = new Uri("/Images/up.png", UriKind.Relative);
+				grid.Visibility = System.Windows.Visibility.Visible;
+			}
+			image.EndInit();
+			img.Source = image;
 		}
 		private void DJClicked(object sender, RoutedEventArgs e)
 		{
@@ -154,10 +173,81 @@ namespace Bisutti.Brigada
 			Inconsistencias wdn = new Inconsistencias(this);
 			wdn.Show();
 		}
+		private void InconsistenciasToggle(object sender, RoutedEventArgs e)
+		{
+			ToggleVisibility(LstIncosistencias, ImgInconsistencias);
+		}
 		public enum MenuState
 		{
 			Collapsed, Expanded
 		}
-
+		public List<Model.Inconsistencia> Collection
+		{
+			get
+			{
+				return new Data.Inconsistencia().GetCollection(0);
+			}
+		}
+		private void CorrectClicked(object sender, MouseButtonEventArgs e)
+		{
+			Model.Inconsistencia i = (Model.Inconsistencia)((Control)sender).DataContext;
+			CurrentId = i.SourceIds;
+			string currentAction = CurrentAction;
+			switch (i.Source)
+			{
+				case "Eventos":
+					EventosClicked(sender, e);
+					if (currentAction == i.Source)
+						EventoLoadingComplete(sender, e);
+					else
+						((Forms.Evento)CurrentControl).Loaded += EventoLoadingComplete;
+					break;
+				case "Colaboradores":
+					ColaboradoresClicked(sender, e);
+					if (currentAction == i.Source)
+						ColaboradoresLoadingComplete(sender, e);
+					else
+						((Forms.Colaborador)CurrentControl).Loaded += ColaboradoresLoadingComplete;
+					break;
+				case "DJs":
+					DJClicked(sender, e);
+					if (currentAction == i.Source)
+						DJLoadingComplete(sender, e);
+					else
+						((Forms.DJs)CurrentControl).Loaded += DJLoadingComplete;
+					break;
+				case "Produtoras":
+					ProdutorasClicked(sender, e);
+					if (currentAction == i.Source)
+						ProdutorasLoadingComplete(sender, e);
+					else
+						((Forms.Produtora)CurrentControl).Loaded += ProdutorasLoadingComplete;
+					break;
+			}
+		}
+		private void EventoLoadingComplete(object sender, RoutedEventArgs e)
+		{
+			((Forms.Evento)CurrentControl).Element = new Data.Evento().GetElement(CurrentId);
+			((Forms.Evento)CurrentControl).RefreshBindings();
+			((Forms.Evento)CurrentControl).Loaded -= EventoLoadingComplete;
+		}
+		private void ColaboradoresLoadingComplete(object sender, RoutedEventArgs e)
+		{
+			((Forms.Colaborador)CurrentControl).Element = new Data.Colaborador().GetElement(CurrentId);
+			((Forms.Colaborador)CurrentControl).RefreshBindings();
+			((Forms.Colaborador)CurrentControl).Loaded -= ColaboradoresLoadingComplete;
+		}
+		private void DJLoadingComplete(object sender, RoutedEventArgs e)
+		{
+			((Forms.DJs)CurrentControl).Element = new Data.DJ().GetElement(CurrentId);
+			((Forms.DJs)CurrentControl).RefreshBindings();
+			((Forms.DJs)CurrentControl).Loaded -= DJLoadingComplete;
+		}
+		private void ProdutorasLoadingComplete(object sender, RoutedEventArgs e)
+		{
+			((Forms.Produtora)CurrentControl).Element = new Data.Produtora().GetElement(CurrentId);
+			((Forms.Produtora)CurrentControl).RefreshBindings();
+			((Forms.Produtora)CurrentControl).Loaded -= ProdutorasLoadingComplete;
+		}
 	}
 }

@@ -182,6 +182,16 @@ namespace Bisutti.Brigada
 				control.GetBindingExpression(CurrencyTextBox.ValueProperty).UpdateTarget();
 			control.Validate();
 		}
+		public static void UpdateSource(this CurrencyTextBox control)
+		{
+			if (control.GetBindingExpression(CurrencyTextBox.TextProperty) != null)
+				control.GetBindingExpression(CurrencyTextBox.TextProperty).UpdateSource();
+		}
+		public static void UpdateTarget(this CurrencyTextBox control)
+		{
+			if (control.GetBindingExpression(CurrencyTextBox.TextProperty) != null)
+				control.GetBindingExpression(CurrencyTextBox.TextProperty).UpdateTarget();
+		}
 		public static void Update(this ListView control)
 		{
 			if (control.GetBindingExpression(ListView.ItemsSourceProperty) != null)
@@ -204,13 +214,33 @@ namespace Bisutti.Brigada
 				control.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateTarget();
 			control.Validate();
 		}
+		public static void UpdateSource(this CheckBox control)
+		{
+			if (control.GetBindingExpression(CheckBox.IsCheckedProperty) != null)
+				control.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateSource();
+		}
+		public static void UpdateTarget(this CheckBox control)
+		{
+			if (control.GetBindingExpression(CheckBox.IsCheckedProperty) != null)
+				control.GetBindingExpression(CheckBox.IsCheckedProperty).UpdateTarget();
+		}
 		public static void Update(this ComboBox control)
 		{
-			if (control.GetBindingExpression(ListView.SelectedValueProperty) != null)
-				control.GetBindingExpression(ListView.SelectedValueProperty).UpdateSource();
-			if (control.GetBindingExpression(ListView.SelectedValueProperty) != null)
-				control.GetBindingExpression(ListView.SelectedValueProperty).UpdateTarget();
+			if (control.GetBindingExpression(ComboBox.SelectedValueProperty) != null)
+				control.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateSource();
+			if (control.GetBindingExpression(ComboBox.SelectedValueProperty) != null)
+				control.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateTarget();
 			control.Validate();
+		}
+		public static void UpdateSource(this ComboBox control)
+		{
+			if (control.GetBindingExpression(ComboBox.SelectedValueProperty) != null)
+				control.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateSource();
+		}
+		public static void UpdateTarget(this ComboBox control)
+		{
+			if (control.GetBindingExpression(ComboBox.SelectedValueProperty) != null)
+				control.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateTarget();
 		}
 		public static void Update(this VIBlend.WPF.Controls.DateTimePicker control)
 		{

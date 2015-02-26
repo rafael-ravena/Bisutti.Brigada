@@ -217,6 +217,24 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+		<Style TargetType="Button" x:Key="CleanButton">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Button Margin="2" Padding="0" VerticalAlignment="Center" ToolTip="{TemplateBinding Button.Content}">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="35" />
+								</Grid.ColumnDefinitions>
+								<TextBlock Text="{TemplateBinding Button.Content}" Margin="5,0,0,0" VerticalAlignment="Center" />
+								<Image Source="Images/delete.png" Grid.Column="1" Stretch="UniformToFill" VerticalAlignment="Center" Margin="10, 2" Width="15" Height="15" />
+							</Grid>
+						</Button>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 		<Style TargetType="Button" x:Key="FindButton">
 			<Setter Property="Template">
 				<Setter.Value>

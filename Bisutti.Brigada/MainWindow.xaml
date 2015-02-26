@@ -8,7 +8,7 @@
 		<DockPanel.Background>
 			<ImageBrush ImageSource="Images/background.jpg" AlignmentX="Left" AlignmentY="Bottom" Stretch="Fill" />
 		</DockPanel.Background>
-		<Grid Name="Menu">
+		<Grid Name="Menu" Width="180" DockPanel.Dock="Left">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="30" />
@@ -47,9 +47,30 @@
 				<Button DockPanel.Dock="Top" Style="{StaticResource Importacoes}" Click="ImportacoesClicked" Content="Importar de excel" Name="Importacoes" />
 				<Rectangle DockPanel.Dock="Top" Style="{StaticResource MenuSeparator}" />
 				<Button DockPanel.Dock="Top" Style="{StaticResource Configuracoes}" Click="ConfiguracoesClicked" />
-				<Button DockPanel.Dock="Bottom" Style="{StaticResource Incosistencias}" Click="InconsistenciasClicked" />
 				<TextBlock></TextBlock>
 			</DockPanel>
 		</Grid>
+		<Border DockPanel.Dock="Bottom" Style="{StaticResource PanelBorder}" MaxHeight="150">
+			<Grid>
+				<ListView Name="LstIncosistencias" ItemsSource="{Binding DataContext.Collection}" Margin="0,0,18,0">
+					<ListView.View>
+						<GridView>
+							<GridViewColumn Header="Onde" DisplayMemberBinding="{Binding Path=Source}" />
+							<GridViewColumn Header="Erro" DisplayMemberBinding="{Binding Path=Message}" />
+						</GridView>
+					</ListView.View>
+					<ListView.ItemContainerStyle>
+						<Style TargetType="ListViewItem">
+							<EventSetter Event="PreviewMouseLeftButtonDown" Handler="CorrectClicked" />
+						</Style>
+					</ListView.ItemContainerStyle>
+				</ListView>
+				<StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" VerticalAlignment="Bottom">
+					<Button Width="16" Height="16" Click="InconsistenciasToggle">
+						<Image Name="ImgInconsistencias" Source="Images/up.png" />
+					</Button>
+				</StackPanel>
+			</Grid>
+		</Border>
 	</DockPanel>
 </Window>

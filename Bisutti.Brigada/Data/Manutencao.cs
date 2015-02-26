@@ -30,5 +30,9 @@ namespace Bisutti.Brigada.Data
 		{
 			return context.Manutencao.OrderBy(c => c.Nome).ToList();
 		}
+		internal List<Model.Manutencao> Filter(DateTime inicio, DateTime termino)
+		{
+			return context.Manutencao.Where(m => m.Data.CompareTo(inicio) >= 0 && m.Data.CompareTo(termino) <= 0).ToList();
+		}
 	}
 }

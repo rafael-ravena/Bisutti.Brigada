@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace Bisutti.Brigada.Forms
 				ColaboradoresAtribuidos.Add(new ColaboradorAtribuido { Nome = c.Nome, Count = c.Eventos.Count });
 			ClearFilterClicked(new object(), new RoutedEventArgs());
 		}
-		private void ToggleVisibility(Grid grid, Image img)
+		public void ToggleVisibility(Grid grid, Image img)
 		{
 			BitmapImage image = new BitmapImage();
 			image.BeginInit();
@@ -52,7 +53,7 @@ namespace Bisutti.Brigada.Forms
 			image.EndInit();
 			img.Source = image;
 		}
-		private void SalvarClicked(object sender, RoutedEventArgs e)
+		public void SalvarClicked(object sender, RoutedEventArgs e)
 		{
 			if (!IsValid())
 				return;
@@ -62,21 +63,21 @@ namespace Bisutti.Brigada.Forms
 				new Data.Evento().Update(Element);
 			ClearForm();
 		}
-		private void CancelarClicked(object sender, RoutedEventArgs e)
+		public void CancelarClicked(object sender, RoutedEventArgs e)
 		{
 			ClearForm();
 		}
-		private void DeleteBrigadaClicked(object sender, RoutedEventArgs e)
+		public void DeleteBrigadaClicked(object sender, RoutedEventArgs e)
 		{
 			new Data.Brigada().Delete(((Model.Brigada)((Button)sender).DataContext).Id);
 			ClearForm();
 		}
-		private void EditEventoClicked(object sender, MouseButtonEventArgs e)
+		public void EditEventoClicked(object sender, MouseButtonEventArgs e)
 		{
 			Element = (Model.Evento)((Button)sender).DataContext;
 			RefreshBindings();
 		}
-		private void DeleteEventoClicked(object sender, MouseButtonEventArgs e)
+		public void DeleteEventoClicked(object sender, MouseButtonEventArgs e)
 		{
 			int[] brigadaIds = ((Model.Evento)((Button)sender).DataContext).Colaboradores.Select(b => b.Id).ToArray<int>();
 			foreach (int id in brigadaIds)
@@ -86,7 +87,7 @@ namespace Bisutti.Brigada.Forms
 			new Data.Evento().Delete(((Model.Evento)((Button)sender).DataContext).Id);
 			ClearForm();
 		}
-		private void AddBrigadaClicked(object sender, RoutedEventArgs e)
+		public void AddBrigadaClicked(object sender, RoutedEventArgs e)
 		{
 			if (!IsBrigadaValid())
 				return;
@@ -101,23 +102,23 @@ namespace Bisutti.Brigada.Forms
 			}
 			ClearForm();
 		}
-		private void EventoToggle(object sender, RoutedEventArgs e)
+		public void EventoToggle(object sender, RoutedEventArgs e)
 		{
 			ToggleVisibility(GridEvento, ImgEvento);
 		}
-		private void BrigadaToggle(object sender, RoutedEventArgs e)
+		public void BrigadaToggle(object sender, RoutedEventArgs e)
 		{
 			ToggleVisibility(GridBrigada, ImgBrigada);
 		}
-		private void FilterChanged(object sender, VIBlend.WPF.Controls.DateTimePickerSelectionChangedEventArgs e)
+		public void FilterChanged(object sender, VIBlend.WPF.Controls.DateTimePickerSelectionChangedEventArgs e)
 		{
 			ClearForm();
 		}
-		private void FilterChanged(object sender, SelectionChangedEventArgs e)
+		public void FilterChanged(object sender, SelectionChangedEventArgs e)
 		{
 			ClearForm();
 		}
-		private void ClearFilterClicked(object sender, RoutedEventArgs e)
+		public void ClearFilterClicked(object sender, RoutedEventArgs e)
 		{
 			FilterLocal = 0;
 			FilterProdutora = 0;
@@ -126,7 +127,7 @@ namespace Bisutti.Brigada.Forms
 			cboFilterLocal.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateTarget();
 			cboFilterProdutora.GetBindingExpression(ComboBox.SelectedValueProperty).UpdateTarget();
 		}
-		private void SearchFileClicked(object sender, RoutedEventArgs e)
+		public void SearchFileClicked(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog file = new OpenFileDialog();
 			if (file.ShowDialog() == true)

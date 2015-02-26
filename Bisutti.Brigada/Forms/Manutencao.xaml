@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Bisutti.Brigada.Forms.Manutencao"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:vi="clr-namespace:VIBlend.WPF.Controls;assembly=VIBlend.WPF.Editors"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="550">
+	<DockPanel>
+		<Border Style="{StaticResource PanelBorder}" DockPanel.Dock="Top">
+			<Grid Margin="5">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="150" />
+					<ColumnDefinition Width="200" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="25" />
+					<RowDefinition Height="25" />
+					<RowDefinition Height="25" />
+					<RowDefinition Height="25" />
+				</Grid.RowDefinitions>
+				<TextBlock>Data:</TextBlock>
+				<TextBlock Grid.Row="1">Nome:</TextBlock>
+				<TextBlock Grid.Row="2">Telefone:</TextBlock>
+				<TextBox Name="TxbNome" Text="{Binding Path=DataContext.Element.Nome}" Grid.Row="1" Grid.Column="1" />
+				<TextBox Name="TxbTelefone" Text="{Binding Path=DataContext.Element.Telefone}" Grid.Row="2" Grid.Column="1" />
+				<vi:DateTimePicker Name="txbData" Grid.Column="1" SelectedDate="{Binding Path=DataContext.Element.Data, Mode=TwoWay}" Culture="pt-BR" DefaultDateTimeFormat="ShortDatePattern" />
+				<StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+					<Button Style="{StaticResource SaveButton}" Content="Salvar" Click="SalvarClicked" />
+					<Button Style="{StaticResource DiscartButton}" Content="Descartar" Click="DescartarClicked" />
+					<TextBlock Name="Trace" />
+				</StackPanel>
+			</Grid>
+		</Border>
+		<Border DockPanel.Dock="Top" Style="{StaticResource PanelBorder}">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Style="{StaticResource InfoText}">Filtrar por:</TextBlock>
+				<TextBlock>Data:</TextBlock>
+				<vi:DateTimePicker Name="txbFilterInicial" SelectedDate="{Binding Path=DataContext.FilterInicial, Mode=TwoWay}" SelectedDateChanged="FilterChanged" Culture="pt-BR" DefaultDateTimeFormat="ShortDatePattern" />
+				<TextBlock>até</TextBlock>
+				<vi:DateTimePicker Name="txbFilterFinal" SelectedDate="{Binding Path=DataContext.FilterFinal, Mode=TwoWay}" SelectedDateChanged="FilterChanged" Culture="pt-BR" DefaultDateTimeFormat="ShortDatePattern" />
+			</StackPanel>
+		</Border>
+		<ListView Margin="5" ItemsSource="{Binding Path=DataContext.Collection}" Name="LstManutencao">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Editar">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource EditButton}" PreviewMouseLeftButtonUp="EditElementClicked" Content="Editar" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn Header="Excluir">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<Button Style="{StaticResource DeleteButton}" PreviewMouseLeftButtonUp="DeleteElementClicked" Content="Editar" />
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+					<GridViewColumn DisplayMemberBinding="{Binding Path=Data}" Header="Data" Width="100" />
+					<GridViewColumn DisplayMemberBinding="{Binding Path=Nome}" Header="Nome" Width="200" />
+					<GridViewColumn DisplayMemberBinding="{Binding Path=Telefone}" Header="Telefone" Width="100" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</DockPanel>
+</UserControl>
